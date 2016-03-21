@@ -1,7 +1,6 @@
-
 <?php
     //cria a sessão table com o nome da table do bd, que sera usado em server_processing
-    $_SESSION["table"]="digitulus_opportunity";
+    $_SESSION["table"]="digitulus_opportunity_complete";
 ?> 
 
 <!-- Right side column. Contains the navbar and content of the page -->
@@ -51,7 +50,7 @@
                                     <h3 class="box-title">Atendimentos ADMIN</h3>                                    
                                 </div><!-- /.box-header -->
                                 <div class="box-body table-responsive">
-                                    <table id="list_opportunity" class="table table-bordered ">
+                                    <table id="list_opportunity_complete" class="table table-bordered ">
                                         <thead>
                                             <tr>
                                                 <th>Id Atendimento</th>
@@ -62,6 +61,7 @@
                                                 <th>Tel</th>
                                                 <th>Cel</th>
                                                 <th>E-mail</th>
+                                                <th>Vendedor</th>
                                                 <th>Continuar Atendimento</th>
                                                 <th>Concluir Venda</th>
                                             </tr>
@@ -77,6 +77,7 @@
                                                 <th>Tel</th>
                                                 <th>Cel</th>
                                                 <th>E-mail</th>
+                                                <th>Vendedor</th>
                                                 <th>Continuar Atendimento</th>
                                                 <th>Concluir Venda</th>              
                                             </tr>
@@ -93,7 +94,7 @@
             //script para carregar o conteúdo da tabela
             $(document).ready(function() {
                 var cbx;
-                var table = $('#list_opportunity').DataTable( {
+                var table = $('#list_opportunity_complete').DataTable( {
                     dom: 'Bfrtip',
                     "processing": true,
                     "serverSide": true,
@@ -110,208 +111,50 @@
                         "url":"pagination/pagination_serverside.php",
                         "type": "POST"
                     },
-                    //quando a tabela acaba de carregar as cores das linhas das tabelas são mudadas de acordo com o status do oppotunity
-                    "initComplete": function () {
-                        $('#list_opportunity tbody tr').each( function () {
-                            //pega o nome da classa do tr
-                            var classe =$(this).attr('class');
-                            //pega o conteúdo do dentro da terceira coluna da respectiva linha
-                            var status=$(this).find('td:eq(2)').text();
-                            switch(status){
-                                //Cores para o Atendimento Fechado (Vendido)  
-                                case "Vendido":
-                                    //muda a cor da linha caso seja uma linha par
-                                    if(classe=="even"){
-                                        //cor inicial
-                                        $(this).css({"background-color": "#ccffcc"});
-                                        //cor do hover(parar o mouse em cima)
-                                        $(this).hover(function(){
-                                            $(this).css("background-color", "#B6B7B8");
-                                            }, function(){
-                                            //cor ao tirar o mouse
-                                            $(this).css("background-color", "#ccffcc");
-                                        });
-                                    }
-                                    //muda a cor da linha caso a linha seja ímpar
-                                    else{
-                                        //cor inicial
-                                        $(this).css({"background-color": "#99ff99"});
-                                        $(this).hover(function(){
-                                            //cor de hover(para o mouse em cima)
-                                            $(this).css("background-color", "#B6B7B8");
-                                            }, function(){
-                                            //cor ao tirar o mouse
-                                            $(this).css("background-color", "#99ff99");
-                                        });
-                                    }
-                                    break;
-                                //Cores para o Status Atendimento Não Fechado (Não Vendido)   
-                                case "Não Vendido":
-                                    //muda a cor da linha caso seja uma linha par
-                                    if(classe=="even"){
-                                        //cor inicial
-                                        $(this).css({"background-color": "#ffcc99"});
-                                        //cor do hover(parar o mouse em cima)
-                                        $(this).hover(function(){
-                                            $(this).css("background-color", "#B6B7B8");
-                                            }, function(){
-                                            //cor ao tirar o mouse
-                                            $(this).css("background-color", "#ffcc99");
-                                        });
-                                    }
-                                    //muda a cor da linha caso a linha seja ímpar
-                                    else{
-                                        //cor inicial
-                                        $(this).css({"background-color": "#ff9966"});
-                                        $(this).hover(function(){
-                                            //cor de hover(para o mouse em cima)
-                                            $(this).css("background-color", "#B6B7B8");
-                                            }, function(){
-                                            //cor ao tirar o mouse
-                                            $(this).css("background-color", "#ff9966");
-                                        });
-                                    }
-                                    break;
-                                //Cores para o Status Atendimento em Negociação que é preciso aguardar contato do cliente   
-                                case "Aguardar":
-                                    //muda a cor da linha caso seja uma linha par
-                                    if(classe=="even"){
-                                        //cor inicial
-                                        $(this).css({"background-color": "#ffffff"});
-                                        //cor do hover(parar o mouse em cima)
-                                        $(this).hover(function(){
-                                            $(this).css("background-color", "#B6B7B8");
-                                            }, function(){
-                                            //cor ao tirar o mouse
-                                            $(this).css("background-color", "#ffffff");
-                                        });
-                                    }
-                                    //muda a cor da linha caso a linha seja ímpar
-                                    else{
-                                        //cor inicial
-                                        $(this).css({"background-color": "#f2f2f2"});
-                                        $(this).hover(function(){
-                                            //cor de hover(para o mouse em cima)
-                                            $(this).css("background-color", "#B6B7B8");
-                                            }, function(){
-                                            //cor ao tirar o mouse
-                                            $(this).css("background-color", "#f2f2f2");
-                                        });
-                                    }
-                                    break;
-                                //Cores para o Status Atendimento em Negociação que é preciso contatar o cliente   
-                                case "Contatar":
-                                    //muda a cor da linha caso seja uma linha par
-                                    if(classe=="even"){
-                                        //cor inicial
-                                        $(this).css({"background-color": "#ffe5ff"});
-                                        //cor do hover(parar o mouse em cima)
-                                        $(this).hover(function(){
-                                            $(this).css("background-color", "#B6B7B8");
-                                            }, function(){
-                                            //cor ao tirar o mouse
-                                            $(this).css("background-color", "#ffe5ff");
-                                        });
-                                    }
-                                    //muda a cor da linha caso a linha seja ímpar
-                                    else{
-                                        //cor inicial
-                                        $(this).css({"background-color": "#ffccff"});
-                                        $(this).hover(function(){
-                                            //cor de hover(para o mouse em cima)
-                                            $(this).css("background-color", "#B6B7B8");
-                                            }, function(){
-                                            //cor ao tirar o mouse
-                                            $(this).css("background-color", "#ffccff");
-                                        });
-                                    }
-                                    break;
-                                //Cores para o Status Atendimento com possibilidade de Retorno    
-                                case "Venda Futura":
-                                    //muda a cor da linha caso seja uma linha par
-                                    if(classe=="even"){
-                                        //cor inicial
-                                        $(this).css({"background-color": "#ffffcc"});
-                                        //cor do hover(parar o mouse em cima)
-                                        $(this).hover(function(){
-                                            $(this).css("background-color", "#B6B7B8");
-                                            }, function(){
-                                            //cor ao tirar o mouse
-                                            $(this).css("background-color", "#ffffcc");
-                                        });
-                                    }
-                                    //muda a cor da linha caso a linha seja ímpar
-                                    else{
-                                        //cor inicial
-                                        $(this).css({"background-color": "#ffff99"});
-                                        $(this).hover(function(){
-                                            //cor de hover(para o mouse em cima)
-                                            $(this).css("background-color", "#B6B7B8");
-                                            }, function(){
-                                            //cor ao tirar o mouse
-                                            $(this).css("background-color", "#ffff99");
-                                        });
-                                    }
-                                    break;
-                                //Cores para o Status Atendimento Trasferido    
-                                case "Transferido":
-                                    //muda a cor da linha caso seja uma linha par
-                                    if(classe=="even"){
-                                        //cor inicial
-                                        $(this).css({"background-color": "#eafbfb"});
-                                        //cor do hover(parar o mouse em cima)
-                                        $(this).hover(function(){
-                                            $(this).css("background-color", "#B6B7B8");
-                                            }, function(){
-                                            //cor ao tirar o mouse
-                                            $(this).css("background-color", "#eafbfb");
-                                        });
-                                    }
-                                    //muda a cor da linha caso a linha seja ímpar
-                                    else{
-                                        //cor inicial
-                                        $(this).css({"background-color": "#d4f7f7"});
-                                        $(this).hover(function(){
-                                            //cor de hover(para o mouse em cima)
-                                            $(this).css("background-color", "#B6B7B8");
-                                            }, function(){
-                                            //cor ao tirar o mouse
-                                            $(this).css("background-color", "#d4f7f7");
-                                        });
-                                    }
-                                    break;
-                                    
-                            }
-                            
-                        } );
-                        
-                    },
+                    
                     "fnCreatedRow": function( nRow, ajax, iDataIndex ) {
-                         // nRow - this is the HTML element of the row
-                         // aData - array of the data in the columns. Get column 4 data: aData[3]
-                         // iDataIndex - row index in the table
-                         // Append to the first column
-                         //Gera o link para edição na última coluna
-                         $('td:eq(8)', nRow).html("<a href='index.php?page=Editar-Atendimento&opportunity_id="+ajax[0]+"&client_id="+ajax[7]+"''><i class='fa fa-edit'/>Continuar Atendimento</a>");
-                         $('td:eq(9)', nRow).html("<a href='index.php?page=Concluir-Venda&opportunity_id="+ajax[0]+"&client_id="+ajax[7]+"''><i class='fa fa-check-square-o'/>Concluir Venda</a>");
+                        // nRow - this is the HTML element of the row
+                        // aData - array of the data in the columns. Get column 4 data: aData[3]
+                        // iDataIndex - row index in the table
+                        // Append to the first column
+                        //Gera o link para edição na última coluna
+                        var usr_name,deal_course_id;
+                        var img_path="img/profile/default.png";
+                        //verifica se existe a imagem do usuário, caso exista ela é mostrada. caso não exista é mostrada a imagem default.png
+                        $.get("img/profile/"+ajax[8]+".jpg")
+                            .done(function() { 
+                                img_path= "img/profile/"+ajax[8]+".jpg";
+                            }).fail(function() { 
+                                img_path= "img/profile/default.png";
+                            })
+                        //pega o nome do usario atraves de uma resposta ajax
+                        usr_name=ajax_db_return({id: "usr_name", search_word: ajax[8], target_field: "username", search_field: "user_id", table: "digitulus_user"});
+                        //exibe o nome e a imagem do usuário
+                        $('td:eq(8)', nRow).html(usr_name+"<img src='"+img_path+"' class='img-circle' width='50' height='50' alt='User Image' />");
+                        $('td:eq(9)', nRow).html("<a href='index.php?page=Editar-Atendimento&opportunity_id="+ajax[0]+"&client_id="+ajax[9]+"''><i class='fa fa-edit'/>Continuar Atendimento</a>");
+                        $('td:eq(10)', nRow).html("<a href='index.php?page=Concluir-Venda&opportunity_id="+ajax[0]+"&client_id="+ajax[9]+"''><i class='fa fa-check-square-o'/>Concluir Venda</a>");
+                        
+                        //função para colorir a tabela de acordo com o status
+                        //nRow é o elemento HTML da linha, iDataIndex é o número da linha, e ajax[2]/status é o status do atendimento
+                        color_row(nRow,iDataIndex,ajax[2]);
                     },
                 } );
                 
                 //Coloca o input pra busca no head de cada coluna
-                $('#list_opportunity tfoot th').each( function () {
-                    var title = $('#list_opportunity thead th').eq( $(this).index() ).text();
+                $('#list_opportunity_complete tfoot th').each( function () {
+                    var title = $('#list_opportunity_complete thead th').eq( $(this).index() ).text();
                     $(this).html( '<input class="form-control" type="text" placeholder="Buscar '+title+'" />' );
                 } );
 
                 // Aplica o filtro
-                $("#list_opportunity tfoot input").on( 'keyup change', function () {
+                $("#list_opportunity_complete tfoot input").on( 'keyup change', function () {
                     table
                         .column( $(this).parent().index()+':visible' )
                         .search( this.value )
                         .draw();
                 } );
                 var j=0;
-                $('#list_opportunity thead th').each( function () {
+                $('#list_opportunity_complete thead th').each( function () {
                     // Get the column API object
                     var visibility=$(this).attr('visibility');
                     var col = table.column( j );
@@ -322,4 +165,41 @@
                     j++;
                 } );
             } );
+function ajax_db_return(){
+        //search_word= o que foi digitado no input
+        //target_field= o campo que será retornado na busca no bd
+        //search_field= o campo no bd em que o search_word será pesquisado
+        //table= tabela que sera pesquisada
+        //validate= bool para validar o campo apenas para aceitar os valores da lista
+        //extra_field=campo da clausula extra
+        //extra_clause=valor que será pesquisado na clausula extra  
+        var id=arguments[0]["id"],
+        search_word=arguments[0]["search_word"],
+        target_field=arguments[0]["target_field"],
+        search_field=arguments[0]["search_field"],
+        table=arguments[0]["table"],
+        validate=arguments[0]["validate"],
+        extra_clause=arguments[0]["extra_clause"],
+        extra_field=arguments[0]["extra_field"],
+        result;
+        $.ajax({
+            url:"ajax_db_return.php",
+            dataType: "json",
+            //faz com que a resposta do ajax seja sincrona
+            async: false,
+            data: {
+                search_word: search_word,
+                target_field: target_field,
+                search_field: search_field,  
+                table: table,
+                extra_clause: extra_clause,
+                extra_field: extra_field
+            },
+                success: function(data){
+                    result=data[0]
+                }
+        });
+        $('#'+id).val(result);
+        return result;
+    }
         </script>

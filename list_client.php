@@ -62,6 +62,7 @@
                                                 <th>E-mail</th>
                                                 <th>Editar Cliente</th>
                                                 <th>Novo Atendimento</th>
+                                                <th>Imprimir Client</th>
                                             </tr>
                                         </thead>
 
@@ -75,6 +76,7 @@
                                                 <th>E-mail</th>
                                                 <th>Editar Cliente</th>
                                                 <th>Novo Atendimento</th>             
+                                                <th>Imprimir client</th>             
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -113,6 +115,7 @@
                          //Gera o link para edição na última coluna
                          $('td:eq(6)', nRow).html("<a href='index.php?page=Editar-Cliente&client_id="+ajax[0]+"'><i class='fa fa-edit'/> Editar Cliente</a>");
                          $('td:eq(7)', nRow).html("<a href='index.php?page=Adicionar-Atendimento&client_id="+ajax[0]+"'><i class='fa fa-plus-circle'/> Novo Atendimento</a>");
+                         $('td:eq(8)', nRow).html("<a href='print_client.php?client_id="+ajax[0]+"' target='_blank'><i class='fa fa-print'/> Imprimir</a>");
                     },
                 } );
                 

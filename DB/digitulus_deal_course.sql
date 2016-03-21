@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 15-Dez-2015 às 13:43
+-- Generation Time: 25-Jan-2016 às 14:02
 -- Versão do servidor: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -40,12 +40,13 @@ CREATE TABLE IF NOT EXISTS `digitulus_deal_course` (
   `start_date` date NOT NULL,
   `duration` int(11) NOT NULL,
   `finish_date` date NOT NULL,
-  `currency_code` varchar(3) COLLATE utf8_unicode_ci NOT NULL,
+  `currency_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `banking_fee_value` double(11,4) NOT NULL,
   `registration_fee_value` double(11,4) NOT NULL,
   `course_value` double(11,4) NOT NULL,
   `material_fee_value` double(11,4) NOT NULL,
   `others_value` double(11,4) NOT NULL,
+  `others_value_description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `accommodation_type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `room` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `meals` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -56,7 +57,8 @@ CREATE TABLE IF NOT EXISTS `digitulus_deal_course` (
   `accommodation_value` double(11,4) NOT NULL,
   `required_insurance_value` double(11,4) NOT NULL,
   `airport_transfer_value` double(11,4) NOT NULL,
-  `extra_nights` double(11,4) NOT NULL,
+  `extra_night` int(11) NOT NULL,
+  `extra_night_value` double(11,4) NOT NULL,
   PRIMARY KEY (`deal_course_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 

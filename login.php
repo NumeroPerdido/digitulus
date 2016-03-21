@@ -11,6 +11,10 @@
         <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <!-- Theme style -->
         <link href="css/Digitulus.css" rel="stylesheet" type="text/css" />
+        <!-- jQuery 2.0.2 -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>      
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -20,7 +24,7 @@
         <![endif]-->
     </head>
     <body class="login">
-        <div class="form-box" id="login-box">
+        <div class="form-box" id="login-box" >
             <div class="header"><span class="login-title">
                 <img class="icon" src="img/logo60x60.png">Digitulus</span>
                 </br>
@@ -69,13 +73,6 @@
                 <button class="btn bg-red btn-circle"><i class="fa fa-google-plus"></i></button>
 
             </div>-->
-        </div>
-
-
-        <!-- jQuery 2.0.2 -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-        <!-- Bootstrap -->
-        <script src="js/bootstrap.min.js" type="text/javascript"></script>        
-
+        </div>  
     </body>
 </html>

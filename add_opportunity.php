@@ -98,13 +98,13 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Status do Atendimento</label>
-                                    <select class="form-control" id="opportunity_status" name="opportunity_status" placeholder="Status do Atendimento">
-                                        <option value="Vendido">Vendido</option>
-                                        <option value="Não Vendido">Não Vendido</option>
-                                        <option value="Aguardar" selected>Aguardar</option>
-                                        <option value="Contatar">Contatar</option>
-                                        <option value="Venda Futura">Venda Futura</option>
-                                        <option value="Transferido">Transferido</option>
+                                    <select class="form-control status_opportunity" id="opportunity_status" name="opportunity_status" placeholder="Status do Atendimento" onchange="change_bg_select();">
+                                        <option class="status_vendido" value="Vendido">Vendido</option>
+                                        <option class="status_nao_vendido" value="Não Vendido">Não Vendido</option>
+                                        <option class="status_aguardar" value="Aguardar" selected>Aguardar</option>
+                                        <option class="status_contatar" value="Contatar">Contatar</option>
+                                        <option class="status_venda_futura" value="Venda Futura">Venda Futura</option>
+                                        <option class="status_transferido" value="Transferido">Transferido</option>
                                     </select>
                             </div>  
                             <!-- Adicionando nova Atividade -->
@@ -141,4 +141,13 @@
 <script>
     //ativa o calandário
     $( "#activity_date" ).datepicker($.datepicker.regional[ "pt-BR" ]);
+
+    //troca o bg do select para o bg da opção selecionada
+    function change_bg_select(){
+        var select_class;
+        select_class= $("#opportunity_status option:selected").attr('class');
+        $("#opportunity_status").removeClass();
+        $("#opportunity_status").addClass("form-control status_opportunity "+select_class);
+    }
+    change_bg_select();
 </script>

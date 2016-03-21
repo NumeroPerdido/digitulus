@@ -280,7 +280,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Outras informações</label>
-                                    <input type="text" class="form-control" id="client_other_information" name="client_other_information" placeholder="Outras informações" value="<?php echo $client->client_other_information; ?>"  />
+                                    <textarea type="text" class="form-control" id="client_other_information" name="client_other_information" placeholder="Outras informações" value="<?php echo $client->client_other_information; ?>"  ></textarea>
                             </div>                             
                             <div class="form-group">
                                 <label class="control-label">Nome da pessoa de contato</label>
@@ -293,7 +293,11 @@
                             <div class="form-group">
                                 <label class="control-label">Telefone da pessoa de contato</label>
                                     <input type="text" class="form-control" id="client_contact_phone" value="<?php echo $client->client_contact_phone;?>" name="client_contact_phone" placeholder="Telefone da pessoa de contato" />
-                            </div>						
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Email da pessoa de contato</label>
+                                    <input type="text" class="form-control" id="client_contact_email" value="<?php echo $client->client_contact_email;?>" name="client_contact_email" placeholder="Email da pessoa de contato" />
+                            </div>  						
                             <!-- Adicionando Atendimento (Oportunidade) -->
                             <label class="control-label"><h4>Dados do Atendimento</h4></label>
 							<div class="form-group">
@@ -324,7 +328,7 @@
                                     <input type="text" class="form-control" id="opportunity_deal_date" value="<?php echo $opportunity->opportunity_deal_date;?>" name="opportunity_deal_date" placeholder="Data da Compra"  />
                             </div>			
 							<div class="form-group">
-									<button class="btn btn-primary" id="submit_form" type="submit">Salvar</button>
+									<button class="btn btn-primary" id="submit_form" type="submit">Salvar e Completar Dados do Orçamento Vendido</button>
                             </div>
                         </form>
                     </div>

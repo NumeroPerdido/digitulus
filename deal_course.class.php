@@ -14,12 +14,13 @@
 		var $start_date;
 		var $duration;
 		var $finish_date;
-		var $currency_code;
+		var $currency_name;
 		var $banking_fee_value;
 		var $registration_fee_value;
 		var $course_value;
 		var $material_fee_value;
 		var $others_value;
+        var $others_value_description;
 		var $accommodation_type;
 		var $room;
 		var $meals;
@@ -30,7 +31,8 @@
 		var $accommodation_value;
 		var $required_insurance_value;
 		var $airport_transfer_value;
-		var $extra_nights;
+		var $extra_night;
+        var $extra_night_value;
 
         function __construct(){
 
@@ -53,12 +55,13 @@
 			$this->start_date = $sql['start_date'];
 			$this->duration = $sql['duration'];
 			$this->finish_date = $sql['finish_date'];
-			$this->currency_code = $sql['currency_code'];
+			$this->currency_name = $sql['currency_name'];
 			$this->banking_fee_value = $sql['banking_fee_value'];
 			$this->registration_fee_value = $sql['registration_fee_value'];
 			$this->course_value = $sql['course_value'];
 			$this->material_fee_value = $sql['material_fee_value'];
 			$this->others_value = $sql['others_value'];
+            $this->others_value_description = $sql['others_value_description'];
 			$this->accommodation_type = $sql['accommodation_type'];
 			$this->room = $sql['room'];
 			$this->meals = $sql['meals'];
@@ -69,7 +72,8 @@
 			$this->accommodation_value = $sql['accommodation_value'];
 			$this->required_insurance_value = $sql['required_insurance_value'];
 			$this->airport_transfer_value = $sql['airport_transfer_value'];
-			$this->extra_nights = $sql['extra_nights'];							
+			$this->extra_night = $sql['extra_night'];	
+            $this->extra_night_value = $sql['extra_night_value'];
             return($sql);
 		}
         
@@ -90,12 +94,13 @@
 			$this->start_date = $sql['start_date'];
 			$this->duration = $sql['duration'];
 			$this->finish_date = $sql['finish_date'];
-			$this->currency_code = $sql['currency_code'];
+			$this->currency_name = $sql['currency_name'];
 			$this->banking_fee_value = $sql['banking_fee_value'];
 			$this->registration_fee_value = $sql['registration_fee_value'];
 			$this->course_value = $sql['course_value'];
 			$this->material_fee_value = $sql['material_fee_value'];
 			$this->others_value = $sql['others_value'];
+            $this->others_value_description = $sql['others_value_description'];
 			$this->accommodation_type = $sql['accommodation_type'];
 			$this->room = $sql['room'];
 			$this->meals = $sql['meals'];
@@ -106,7 +111,8 @@
 			$this->accommodation_value = $sql['accommodation_value'];
 			$this->required_insurance_value = $sql['required_insurance_value'];
 			$this->airport_transfer_value = $sql['airport_transfer_value'];
-			$this->extra_nights = $sql['extra_nights'];							
+			$this->extra_night = $sql['extra_night'];	
+            $this->extra_night_value = $sql['extra_night_value'];
             return($sql);
 		}
         
@@ -119,13 +125,13 @@
 		//atualiza o atendimento no banco de dados
 		function update_deal_course($id_og){
 			$db = new DB();
-            $sql=$db->query("UPDATE digitulus_deal_course SET deal_course_opportunity_id = :deal_course_opportunity_id,deal_course_user_id = :deal_course_user_id,country = :country,school = :school,city = :city,neighbourhood = :neighbourhood,course_name = :course_name,lessons_per_week = :lessons_per_week,lesson_duration = :lesson_duration,start_date = :start_date,duration = :duration,finish_date = :finish_date,currency_code = :currency_code,banking_fee_value = :banking_fee_value,registration_fee_value = :registration_fee_value,course_value = :course_value,material_fee_value = :material_fee_value,others_value = :others_value,accommodation_type = :accommodation_type,room = :room,meals = :meals,accommodation_start_date = :accommodation_start_date,accommodation_duration = :accommodation_duration,accommodation_finish_date = :accommodation_finish_date,accommodation_fee_value = :accommodation_fee_value,accommodation_value = :accommodation_value,required_insurance_value = :required_insurance_value,airport_transfer_value = :airport_transfer_value,extra_nights = :extra_nights WHERE deal_course_id = :deal_course_id", array("deal_course_id"=>$id_og, "deal_course_opportunity_id"=>$this->deal_course_opportunity_id, "deal_course_user_id"=>$this->deal_course_user_id, "country"=>$this->country, "school"=>$this->school, "city"=>$this->city, "neighbourhood"=>$this->neighbourhood, "course_name"=>$this->course_name, "lessons_per_week"=>$this->lessons_per_week, "lesson_duration"=>$this->lesson_duration, "start_date"=>$this->start_date, "duration"=>$this->duration, "finish_date"=>$this->finish_date, "currency_code"=>$this->currency_code, "banking_fee_value"=>$this->banking_fee_value, "registration_fee_value"=>$this->registration_fee_value, "course_value"=>$this->course_value, "material_fee_value"=>$this->material_fee_value, "others_value"=>$this->others_value, "accommodation_type"=>$this->accommodation_type, "room"=>$this->room, "meals"=>$this->meals, "accommodation_start_date"=>$this->accommodation_start_date, "accommodation_duration"=>$this->accommodation_duration, "accommodation_finish_date"=>$this->accommodation_finish_date, "accommodation_fee_value"=>$this->accommodation_fee_value, "accommodation_value"=>$this->accommodation_value, "required_insurance_value"=>$this->required_insurance_value, "airport_transfer_value"=>$this->airport_transfer_value, "extra_nights"=>$this->extra_nights));
+            $sql=$db->query("UPDATE digitulus_deal_course SET country = :country,school = :school,city = :city,neighbourhood = :neighbourhood,course_name = :course_name,lessons_per_week = :lessons_per_week,lesson_duration = :lesson_duration,start_date = :start_date,duration = :duration,finish_date = :finish_date,currency_name = :currency_name,banking_fee_value = :banking_fee_value,registration_fee_value = :registration_fee_value,course_value = :course_value,material_fee_value = :material_fee_value,others_value = :others_value,others_value_description = :others_value_description,accommodation_type = :accommodation_type,room = :room,meals = :meals,accommodation_start_date = :accommodation_start_date,accommodation_duration = :accommodation_duration,accommodation_finish_date = :accommodation_finish_date,accommodation_fee_value = :accommodation_fee_value,accommodation_value = :accommodation_value,required_insurance_value = :required_insurance_value,airport_transfer_value = :airport_transfer_value,extra_night = :extra_night,extra_night_value = :extra_night_value WHERE deal_course_id = :deal_course_id", array("deal_course_id"=>$id_og, "country"=>$this->country, "school"=>$this->school, "city"=>$this->city, "neighbourhood"=>$this->neighbourhood, "course_name"=>$this->course_name, "lessons_per_week"=>$this->lessons_per_week, "lesson_duration"=>$this->lesson_duration, "start_date"=>$this->start_date, "duration"=>$this->duration, "finish_date"=>$this->finish_date, "currency_name"=>$this->currency_name, "banking_fee_value"=>$this->banking_fee_value, "registration_fee_value"=>$this->registration_fee_value, "course_value"=>$this->course_value, "material_fee_value"=>$this->material_fee_value, "others_value"=>$this->others_value, "others_value_description"=>$this->others_value_description, "accommodation_type"=>$this->accommodation_type, "room"=>$this->room, "meals"=>$this->meals, "accommodation_start_date"=>$this->accommodation_start_date, "accommodation_duration"=>$this->accommodation_duration, "accommodation_finish_date"=>$this->accommodation_finish_date, "accommodation_fee_value"=>$this->accommodation_fee_value, "accommodation_value"=>$this->accommodation_value, "required_insurance_value"=>$this->required_insurance_value, "airport_transfer_value"=>$this->airport_transfer_value, "extra_night"=>$this->extra_night, "extra_night_value"=>$this->extra_night_value));
 		}		
 		//insere o atendimento no banco de dados
         function insert_deal_course(){
-            $fields ="deal_course_opportunity_id,deal_course_user_id,country,school,city,neighbourhood,course_name,lessons_per_week,lesson_duration,start_date,duration,finish_date,currency_code,banking_fee_value,registration_fee_value,course_value,material_fee_value,others_value,accommodation_type,room,meals,accommodation_start_date,accommodation_duration,accommodation_finish_date,accommodation_fee_value,accommodation_value,required_insurance_value,airport_transfer_value,extra_nights";
+            $fields ="deal_course_opportunity_id,deal_course_user_id,country,school,city,neighbourhood,course_name,lessons_per_week,lesson_duration,start_date,duration,finish_date,currency_name,banking_fee_value,registration_fee_value,course_value,material_fee_value,others_value,others_value_description,accommodation_type,room,meals,accommodation_start_date,accommodation_duration,accommodation_finish_date,accommodation_fee_value,accommodation_value,required_insurance_value,airport_transfer_value,extra_night,extra_night_value";
             $db= new DB();
-            $insert=$db->query("INSERT INTO digitulus_deal_course(".$fields.") VALUES(:deal_course_opportunity_id, :deal_course_user_id, :country, :school, :city, :neighbourhood, :course_name, :lessons_per_week, :lesson_duration, :start_date, :duration, :finish_date, :currency_code, :banking_fee_value, :registration_fee_value, :course_value, :material_fee_value, :others_value, :accommodation_type, :room, :meals, :accommodation_start_date, :accommodation_duration, :accommodation_finish_date, :accommodation_fee_value, :accommodation_value, :required_insurance_value, :airport_transfer_value, :extra_nights)", array("deal_course_opportunity_id"=>$this->deal_course_opportunity_id, "deal_course_user_id"=>$this->deal_course_user_id, "country"=>$this->country, "school"=>$this->school, "city"=>$this->city, "neighbourhood"=>$this->neighbourhood, "course_name"=>$this->course_name, "lessons_per_week"=>$this->lessons_per_week, "lesson_duration"=>$this->lesson_duration, "start_date"=>$this->start_date, "duration"=>$this->duration, "finish_date"=>$this->finish_date, "currency_code"=>$this->currency_code, "banking_fee_value"=>$this->banking_fee_value, "registration_fee_value"=>$this->registration_fee_value, "course_value"=>$this->course_value, "material_fee_value"=>$this->material_fee_value, "others_value"=>$this->others_value, "accommodation_type"=>$this->accommodation_type, "room"=>$this->room, "meals"=>$this->meals, "accommodation_start_date"=>$this->accommodation_start_date, "accommodation_duration"=>$this->accommodation_duration, "accommodation_finish_date"=>$this->accommodation_finish_date, "accommodation_fee_value"=>$this->accommodation_fee_value, "accommodation_value"=>$this->accommodation_value, "required_insurance_value"=>$this->required_insurance_value, "airport_transfer_value"=>$this->airport_transfer_value, "extra_nights"=>$this->extra_nights));
+            $insert=$db->query("INSERT INTO digitulus_deal_course(".$fields.") VALUES(:deal_course_opportunity_id, :deal_course_user_id, :country, :school, :city, :neighbourhood, :course_name, :lessons_per_week, :lesson_duration, :start_date, :duration, :finish_date, :currency_name, :banking_fee_value, :registration_fee_value, :course_value, :material_fee_value, :others_value, :others_value_description, :accommodation_type, :room, :meals, :accommodation_start_date, :accommodation_duration, :accommodation_finish_date, :accommodation_fee_value, :accommodation_value, :required_insurance_value, :airport_transfer_value, :extra_night, :extra_night_value)", array("deal_course_opportunity_id"=>$this->deal_course_opportunity_id, "deal_course_user_id"=>$this->deal_course_user_id, "country"=>$this->country, "school"=>$this->school, "city"=>$this->city, "neighbourhood"=>$this->neighbourhood, "course_name"=>$this->course_name, "lessons_per_week"=>$this->lessons_per_week, "lesson_duration"=>$this->lesson_duration, "start_date"=>$this->start_date, "duration"=>$this->duration, "finish_date"=>$this->finish_date, "currency_name"=>$this->currency_name, "banking_fee_value"=>$this->banking_fee_value, "registration_fee_value"=>$this->registration_fee_value, "course_value"=>$this->course_value, "material_fee_value"=>$this->material_fee_value, "others_value"=>$this->others_value,"others_value_description"=>$this->others_value_description, "accommodation_type"=>$this->accommodation_type, "room"=>$this->room, "meals"=>$this->meals, "accommodation_start_date"=>$this->accommodation_start_date, "accommodation_duration"=>$this->accommodation_duration, "accommodation_finish_date"=>$this->accommodation_finish_date, "accommodation_fee_value"=>$this->accommodation_fee_value, "accommodation_value"=>$this->accommodation_value, "required_insurance_value"=>$this->required_insurance_value, "airport_transfer_value"=>$this->airport_transfer_value, "extra_night"=>$this->extra_night, "extra_night_value"=>$this->extra_night_value));
             //pega o último id inserido
             $last_id=$db->query("SELECT LAST_INSERT_ID()");
             //retorna o último id inserido

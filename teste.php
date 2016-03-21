@@ -1,108 +1,94 @@
-<?php
-        $db= new DB();
-        //pegas dos durations em mes e semana
-        $duration=$db->query("SELECT * from duration");
-?>
-<aside class="right-side">
-<div class="box-header">
-                                            <h3 class="box-title">Editando Produto 1</h3>
-                                        </div><!-- /.box-header -->
-                                     <div class="box box-warning">
-                                         <div class="tab-content">
-        <div class="col-md-6">
-            <div class="box box-primary">
-                                <div class="box-header">
-                                    <h3 class="box-title">Date picker</h3>
-                                </div>
-                                <div class="box-body">
+<aside class="right-side">                
+    <section class="content-header">
+        <h1>
+           Adicionar Cliente Clientes
+            <small></small>
+        </h1>
+        <br/>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Adicionar cliente</li>
+        </ol>
+    </section>
+    <!-- Main content -->                            
+    <section class="content">
 
-                                    <form method="post" action="index.php?page=teste">
-                                        <label class="control-label">Converter CÃ³digo da Rota da Reserva/EmissÃ£o</label>
-
-                                        <div class="controls">									 			
-                                            <textarea name="convert_flight_code" id="flight_code" rows="10" cols="65" ></textarea>
-                                        </div>
-                                        <input type="submit" value="enviar" />
-                                    </form>
-                                    <?php 
-                                        if(isset($_POST["convert_flight_code"])){
-                                            $row=explode("\n",$_POST["convert_flight_code"]);
-                                            for($i=0;$i<count($row);$i++){
-                                                if($row[$i]!=""){
-                                                    $cel=explode(" ",$row[$i]);
-                                                    echo $cel[1];
-//                                                    echo $row[$i]."<br/>";
-                                                }
-                                            }
-                                        }
-                                        else{
-                                            echo "nada enviado<br/><br/>";
-                                        }
-
-
-
-                                    ?>
-         <!-- phone mask -->
-                                    <div class="form-group">
-                                        <label>US phone mask:</label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-phone"></i>
-                                            </div>
-                                            <input type="text" class="form-control" data-inputmask='"mask": "(999) 999-9999"' data-mask/>
-                                        </div><!-- /.input group -->
-                                    </div><!-- /.form group -->
-                                    <div class="form-group">
-                                        <label>Date range:</label>
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-calendar"></i>
-                                            </div>
-                                            <input type="text" class="form-control pull-right" id="reservation"/>
-                                        </div><!-- /.input group -->
-                                    </div><!-- /.form group -->
-
-                                </div><!-- /.box-body -->
-                            </div><!-- /.box -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-primary">
+                    <!-- COMEÇO DO FORM -->
+                    <div class="box-header">
+                        <h3 class="box-title">Adicionar Cliente</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <table border="2" width="100%"  cellspacing="2">
+                          <tbody>
+                            <tr>
+                              <td valign="top"><b>Course Name<br>
+                                </b></td>
+                              <td valign="top"><b>City<br>
+                                </b></td>
+                              <td valign="top"><b>Lessons (Hours)/Week<br>
+                                </b></td>
+                              <td valign="top"><b>Number of Weeks<br>
+                                </b></td>
+                              <td valign="top"><b>Start Date<br>
+                                </b></td>
+                              <td valign="top"><b>Finish Date<br>
+                                </b></td>
+                            </tr>
+                            <tr>
+                              <td valign="top">Standart Course<br>
+                              </td>
+                              <td valign="top">London<br>
+                              </td>
+                              <td valign="top">24<br>
+                              </td>
+                              <td valign="top">4<br>
+                              </td>
+                              <td valign="top">13/05/2013<br>
+                              </td>
+                              <td valign="top">07/06/2013<br>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <br/>
+                        <table border="2" width="100%" cellpadding="2" cellspacing="2">
+                          <tbody>
+                            <tr>
+                              <td valign="top"><b>Accommodation Option<br>
+                                </b></td>
+                              <td valign="top"><b>Room Option<br>
+                                </b></td>
+                              <td valign="top"><b>Meal Option<br>
+                                </b></td>
+                              <td valign="top"><b>Number of Weeks<br>
+                                </b></td>
+                              <td valign="top"><b>Start Date<br>
+                                </b></td>
+                              <td valign="top"><b>Finish Date<br>
+                                </b></td>
+                            </tr>
+                            <tr>
+                              <td valign="top">Host Family<br>
+                              </td>
+                              <td valign="top">single<br>
+                              </td>
+                              <td valign="top">half board<br>
+                              </td>
+                              <td valign="top">4<br>
+                              </td>
+                              <td valign="top">11/05/2013<br>
+                              </td>
+                              <td valign="top">09/06/2013<br>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                    </div>
+                    <!--FINAL DO FORM-->
+                </div>              
+            </div>
         </div>
-                                             <input type="text" name="teste" value="asdasd" />
-        <div class="col-md-6">
-         
-        </div>
-        </div>
-    </div>
-                                   
-</aside>
-<!-- jQuery 2.0.2 -->
-<!--        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>-->
-
-<script>
-    
-$(function() {
-//antedeguemon();
-                $("[data-mask]").inputmask();
-
-            });
-    //Date range picker
-                $('#reservation').daterangepicker();
-                //Date range picker with time picker
-                $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
-                //Date range as a button
-                $('#daterange-btn').daterangepicker(
-                        {
-                            ranges: {
-                                'Today': [moment(), moment()],
-                                'Yesterday': [moment().subtract('days', 1), moment().subtract('days', 1)],
-                                'Last 7 Days': [moment().subtract('days', 6), moment()],
-                                'Last 30 Days': [moment().subtract('days', 29), moment()],
-                                'This Month': [moment().startOf('month'), moment().endOf('month')],
-                                'Last Month': [moment().subtract('month', 1).startOf('month'), moment().subtract('month', 1).endOf('month')]
-                            },
-                            startDate: moment().subtract('days', 29),
-                            endDate: moment()
-                        },
-                function(start, end) {
-                    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-                }
-                );
-</script>
+    </section><!-- /.content -->

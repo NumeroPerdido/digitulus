@@ -57,5 +57,11 @@
             //retorna o último id inserido
             return $last_id;
         }
+        //verifica se existe um orçamento para essa classe
+        function get_deal_course(){
+        	$db= new DB();
+        	$sql=$db->row("SELECT * FROM digitulus_deal_course WHERE deal_course_opportunity_id = :id", array("id" => $this->opportunity_id));
+        	return $sql["deal_course_id"];
+        }
     }
 ?>

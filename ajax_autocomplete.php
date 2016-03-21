@@ -26,9 +26,21 @@
     $result=$db->query($sql);
 
     $ajax=array();
+
+    $targets=explode(",",$target_field);
+
     //transforma o objeto BD em array
     foreach($result as $rs){
-        $ajax[]=$rs[$target_field];
+        $combine_targets="";
+        foreach($targets as $tgs){
+            if(count($targets)>1){
+                $combine_targets.=$rs[$tgs]."|";
+            }
+            else{
+                $combine_targets.=$rs[$tgs];
+            }
+        }
+        $ajax[]=$combine_targets;
     }
     //retorna o ajax para o auto complete
     echo json_encode($ajax);

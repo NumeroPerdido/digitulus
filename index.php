@@ -16,11 +16,11 @@
     include_once "activity.class.php";
     include_once "deal_course.class.php";
 
-
     session_start();
     //se o usuário não estiver logado volta pra página de login
     if(!isset($_SESSION["user"])){
         header('Location: login.php');
+        exit;
     }
     //cria novo usuário
     $user=$_SESSION["user"];
@@ -318,10 +318,10 @@
                         case "Renomear-Imagem":
                             include "Jcrop/rename_img.php";
                             break;
-                            case "Thumbnail-Imagem":
+                        case "Thumbnail-Imagem":
                             include "Jcrop/thumbnail_img.php";
                             break;
-                            case "Remover-Imagem":
+                        case "Remover-Imagem":
                             include "Jcrop/delete_img.php";
                             break;
 						case "Lista-de-Imagens":
@@ -378,9 +378,27 @@
                         case "Adicionar-Orcamento":
                             include "add_deal_course.php";
                             break;
+                        case "Editar-Orçamento":
+                            include "edit_deal_course.php";
+                            break;
+                        case "Adicionar-Familia":
+                            include "add_family_relation.php";
+                            break;
+                        case "Lista-de-Familias":
+                            include "list_family_relation.php";
+                            break;
+                        case "Editar-Familia":
+                            include "edit_family_relation.php";
+                            break;    
                         case "teste":
                             include "teste.php";
                             break;
+                        case "Lista-de-Atendimentos-Vendidos":
+                            include "list_sold_opportunity.php";
+                            break;
+                        case "Gerar-Email-Matricula":
+                            include "generate_registration_email.php";
+                            break;      
                         default:
                             include "404.php";
                             break;
@@ -433,6 +451,8 @@
         <!--ColVis mostra/esconde colunas no datatable -->
         <script src="js/plugins/datatables/dataTables.buttons.js" type="text/javascript"></script>
         <script src="js/plugins/datatables/buttons.colVis.js" type="text/javascript"></script>
+        <!-- Gerar Tabela de status Colorida -->
+        <script src="js/color_status_table.js" type="text/javascript"></script>
         
 		<script src="js/script_table.js"></script>	
 		<!--jQuery Calculator -->

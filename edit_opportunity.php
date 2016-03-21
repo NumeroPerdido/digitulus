@@ -9,7 +9,11 @@
         $opportunity= new Opportunity();
         $opportunity->get_opportunity($_GET["opportunity_id"]);
         $client= new Client();
+        $father= new Client();
+        $mother= new Client();
         $client->get_client($_GET["client_id"]);
+        $father->get_client($client->get_father_id());
+        $mother->get_client($client->get_mother_id());
         $deal_course= new Deal_course();
         $deal_course->get_deal_course_op($opportunity->opportunity_id);
 ?>
@@ -54,9 +58,9 @@
                                 </div><!-- /.box-header -->
                                 <div class="box-body no-padding" style="display: none;">
                                     <div class="row">
-                                        <div class="col-xs-4">
+                                        <div class="col-xs-12">
                                             <div class="pad">
-                                                <div class="form-group">
+                                                <div class="form-group col-xs-4">
                                                     <h4>
                                                         <label>Nome:</label> <?php echo $client->client_name." ".$client->client_surname; ?><br/>
                                                         <label>Telefone:</label> <?php echo $client->client_phone; ?><br/>
@@ -81,6 +85,60 @@
                                                         <label>Relação Contado:</label> <?php echo $client->client_contact_relation; ?><br/>
                                                         <label>Telefone Contato:</label> <?php echo $client->client_contact_phone; ?><br/>
                                                         <label>Futuros Atendimentos:</label> <?php echo $client->client_future_opportunities; ?><br/>
+                                                    </h4>
+                                                </div>
+                                                <div class="form-group col-xs-3" <?php if($father->client_id==""){ echo "hidden='hidden'"; }?>>
+                                                    <h4>
+                                                        <label>Nome do PAI:</label> <?php echo $father->client_name." ".$father->client_surname; ?><br/>
+                                                        <label>Telefone:</label> <?php echo $father->client_phone; ?><br/>
+                                                        <label>Celular:</label> <?php echo $father->client_mobile; ?><br/>
+                                                        <label>Email:</label> <?php echo $father->client_email; ?><br/>
+                                                        <label>Como Chegou Aqui:</label> <?php echo $father->client_how_to_reach_us; ?><br/>
+                                                        <label>Data de Nascimento:</label> <?php echo $father->client_date_of_birth; ?><br/>
+                                                        <label>Endereço:</label> <?php echo $father->client_address; ?><br/>
+                                                        <label>Bairro:</label> <?php echo $father->client_neighbourhood; ?><br/>
+                                                        <label>Cidade:</label> <?php echo $father->client_city; ?><br/>
+                                                        <label>Estado:</label> <?php echo $father->client_state; ?><br/>
+                                                        <label>CEP:</label> <?php echo $father->client_cep; ?><br/>
+                                                        <label>Sexo:</label> <?php echo $father->client_gender; ?><br/>
+                                                        <label>Estado Civil:</label> <?php echo $father->client_civil_status; ?><br/>
+                                                        <label>Profissão:</label> <?php echo $father->client_profession; ?><br/>
+                                                        <label>Passaport:</label> <?php echo $father->client_passport; ?><br/>
+                                                        <label>Validade Passaporte:</label> <?php echo $father->client_passport_expire_date; ?><br/>
+                                                        <label>CPF:</label> <?php echo $father->client_cpf; ?><br/>
+                                                        <label>RG:</label> <?php echo $father->client_rg; ?><br/>
+                                                        <label>Informações Extras:</label> <?php echo $father->client_other_information; ?><br/>
+                                                        <label>Nome de Contato:</label> <?php echo $father->client_contact_name; ?><br/>
+                                                        <label>Relação Contado:</label> <?php echo $father->client_contact_relation; ?><br/>
+                                                        <label>Telefone Contato:</label> <?php echo $father->client_contact_phone; ?><br/>
+                                                        <label>Futuros Atendimentos:</label> <?php echo $father->client_future_opportunities; ?><br/>
+                                                    </h4>
+                                                </div>
+                                                <div class="form-group col-xs-3"<?php if($mother->client_id==""){ echo "hidden='hidden'"; }?>>
+                                                    <h4>
+                                                        <label>Nome da MÂE:</label> <?php echo $mother->client_name." ".$mother->client_surname; ?><br/>
+                                                        <label>Telefone:</label> <?php echo $mother->client_phone; ?><br/>
+                                                        <label>Celular:</label> <?php echo $mother->client_mobile; ?><br/>
+                                                        <label>Email:</label> <?php echo $mother->client_email; ?><br/>
+                                                        <label>Como Chegou Aqui:</label> <?php echo $mother->client_how_to_reach_us; ?><br/>
+                                                        <label>Data de Nascimento:</label> <?php echo $mother->client_date_of_birth; ?><br/>
+                                                        <label>Endereço:</label> <?php echo $mother->client_address; ?><br/>
+                                                        <label>Bairro:</label> <?php echo $mother->client_neighbourhood; ?><br/>
+                                                        <label>Cidade:</label> <?php echo $mother->client_city; ?><br/>
+                                                        <label>Estado:</label> <?php echo $mother->client_state; ?><br/>
+                                                        <label>CEP:</label> <?php echo $mother->client_cep; ?><br/>
+                                                        <label>Sexo:</label> <?php echo $mother->client_gender; ?><br/>
+                                                        <label>Estado Civil:</label> <?php echo $mother->client_civil_status; ?><br/>
+                                                        <label>Profissão:</label> <?php echo $mother->client_profession; ?><br/>
+                                                        <label>Passaport:</label> <?php echo $mother->client_passport; ?><br/>
+                                                        <label>Validade Passaporte:</label> <?php echo $mother->client_passport_expire_date; ?><br/>
+                                                        <label>CPF:</label> <?php echo $mother->client_cpf; ?><br/>
+                                                        <label>RG:</label> <?php echo $mother->client_rg; ?><br/>
+                                                        <label>Informações Extras:</label> <?php echo $mother->client_other_information; ?><br/>
+                                                        <label>Nome de Contato:</label> <?php echo $mother->client_contact_name; ?><br/>
+                                                        <label>Relação Contado:</label> <?php echo $mother->client_contact_relation; ?><br/>
+                                                        <label>Telefone Contato:</label> <?php echo $mother->client_contact_phone; ?><br/>
+                                                        <label>Futuros Atendimentos:</label> <?php echo $mother->client_future_opportunities; ?><br/>
                                                     </h4>
                                                 </div>
                                             </div><!-- /.pad -->
@@ -140,10 +198,10 @@
                             </div><!-- /.box -->
                             <!--Final Box da Add Atividade-->
                             <!--Botão de adicionar orçamento-->
-                            <a href="index.php?page=Adicionar-Orcamento&opportunity_id=<?php echo $opportunity->opportunity_id;?>"><label class="btn btn-warning btn-block">Adicionar Orçamento</label></a>
+                            <!-- <a href="index.php?page=Adicionar-Orcamento&opportunity_id=<?php echo $opportunity->opportunity_id;?>"><label class="btn btn-warning btn-block">Adicionar Orçamento</label></a> -->
                             
                             <!--Botão de gerar contrato-->
-                            <a href="PHPWord/generate_contract.php?opportunity_id=<?php echo $opportunity->opportunity_id;?>&deal_course_id=<?php echo $deal_course->deal_course_id;?>"><label class="btn btn-warning btn-block">Gerar Contrato</label></a>
+                            <!-- <a href="PHPWord/generate_contract.php?opportunity_id=<?php echo $opportunity->opportunity_id;?>&deal_course_id=<?php echo $deal_course->deal_course_id;?>"><label class="btn btn-warning btn-block">Gerar Contrato</label></a> -->
                             
                             <!-- Editando Atendimento (Oportunidade) -->
                             <label class="control-label" ><h4>Dados do Atendimento</h4></label>
@@ -157,13 +215,13 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Status do Atendimento</label>
-                                    <select class="form-control" id="opportunity_status" name="opportunity_status" placeholder="Status do Atendimento">
-                                        <option value="Vendido" <?php if($opportunity->opportunity_status=="Vendido") echo "selected"; ?>>Vendido</option>
-                                        <option value="Não Vendido" <?php if($opportunity->opportunity_status=="Não Vendido") echo "selected"; ?>>Não Vendido</option>
-                                        <option value="Aguardar" <?php if($opportunity->opportunity_status=="Aguardar") echo "selected"; ?>>Aguardar</option>
-                                        <option value="Contatar" <?php if($opportunity->opportunity_status=="Contatar") echo "selected"; ?>>Contatar</option>
-                                        <option value="Venda Futura" <?php if($opportunity->opportunity_status=="Venda Futura") echo "selected"; ?>>Venda Futura</option>
-                                        <option value="Transferido" <?php if($opportunity->opportunity_status=="Transferido") echo "selected"; ?>>Transferido</option>
+                                    <select class="form-control status_opportunity" id="opportunity_status" name="opportunity_status" placeholder="Status do Atendimento" onchange="change_bg_select();">
+                                        <option class="status_vendido" value="Vendido" <?php if($opportunity->opportunity_status=="Vendido") echo "selected"; ?>>Vendido</option>
+                                        <option class="status_nao_vendido" value="Não Vendido" <?php if($opportunity->opportunity_status=="Não Vendido") echo "selected"; ?>>Não Vendido</option>
+                                        <option class="status_aguardar" value="Aguardar" <?php if($opportunity->opportunity_status=="Aguardar") echo "selected"; ?>>Aguardar</option>
+                                        <option class="status_contatar" value="Contatar" <?php if($opportunity->opportunity_status=="Contatar") echo "selected"; ?>>Contatar</option>
+                                        <option class="status_venda_futura" value="Venda Futura" <?php if($opportunity->opportunity_status=="Venda Futura") echo "selected"; ?>>Venda Futura</option>
+                                        <option class="status_transferido" value="Transferido" <?php if($opportunity->opportunity_status=="Transferido") echo "selected"; ?>>Transferido</option>
                                     </select>
                             </div>                               
                             
@@ -338,6 +396,15 @@
         $("#edit_activity_proposal").val(activity["activity_proposal"]);
         $("#edit_activity_answer").val(activity["activity_answer"]);
     }
+
+    //troca o bg do select para o bg da opção selecionada
+    function change_bg_select(){
+        var select_class;
+        select_class= $("#opportunity_status option:selected").attr('class');
+        $("#opportunity_status").removeClass();
+        $("#opportunity_status").addClass("form-control status_opportunity "+select_class);
+    }
+    change_bg_select();
 </script>
 <?php
     }//final do else

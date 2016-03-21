@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: 16-Out-2015 às 16:40
--- Versão do servidor: 5.6.17
--- PHP Version: 5.5.12
+-- Servidor: localhost
+-- Tempo de Geração: 25/01/2016 às 10:49
+-- Versão do servidor: 5.5.46-0ubuntu0.14.04.2
+-- Versão do PHP: 5.5.9-1ubuntu4.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `goarthacom`
+-- Banco de dados: `goarthacom`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `digitulus_user_group`
+-- Estrutura para tabela `digitulus_user_group`
 --
 
 CREATE TABLE IF NOT EXISTS `digitulus_user_group` (
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `digitulus_user_group` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
 
 --
--- Extraindo dados da tabela `digitulus_user_group`
+-- Fazendo dump de dados para tabela `digitulus_user_group`
 --
 
 INSERT INTO `digitulus_user_group` (`group_id`, `name`) VALUES

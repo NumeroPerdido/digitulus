@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tempo de Geração: 11/12/2015 às 14:40
+-- Tempo de Geração: 25/01/2016 às 10:49
 -- Versão do servidor: 5.5.46-0ubuntu0.14.04.2
 -- Versão do PHP: 5.5.9-1ubuntu4.14
 
@@ -51,7 +51,7 @@ INSERT INTO `digitulus_user` (`user_id`, `username`, `password`, `email`, `user_
 (6, 'Joyce Castro', '34fc8f6f47e9fa0efe810550951d29b0', 'joyce@grupoartha.com', '0', '1', 7, '0000-00-00'),
 (7, 'Octavio Davis', '020164202ca23cca053a9dece07bfeeb', 'octavio@grupoartha.com', '0', '1', 7, '0000-00-00'),
 (8, 'Tatiana Lanza Halabi', '8660de3c6724b17035f336e71a84964f', 'tatiana@grupoartha.com', '0', '1', 1, '0000-00-00'),
-(10, 'Matheus Triginelli', 'b925ecab4a69a7120022fb21da9bd216', 'matheus@arthatravel.com', '', '0', 7, '0000-00-00'),
+(10, 'Matheus Triginelli', 'c86ac2fabf072abebc31113d9d4939c1', 'matheus@arthatravel.com', '', '1', 7, '0000-00-00'),
 (11, 'Alexandre Bueno', '558b1e7fbdb40098b15312fe9e73420d', 'alexandre@grupoartha.com', '565def339dce2', '1', 1, '0000-00-00'),
 (12, 'Diana Gomes', '756a704d17229027919c7f439f2583bf', 'diana@grupoartha.com', '', '0', 7, '0000-00-00'),
 (13, 'Marina Wanner', 'd956ad6ff7646c7869c0041a61e42386', 'registrar@grupoartha.com', '', '0', 4, '0000-00-00'),

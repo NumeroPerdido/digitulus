@@ -142,6 +142,18 @@
                     <li class="<?php echo check_active(array("Lista-de-Clientes")); ?>"><a href="index.php?page=Lista-de-Clientes"><i class="fa fa-bars"></i>Lista de Clientes</a></li>
                 </ul>
             </li>
+
+            <li class="treeview <?php echo check_active(array("Lista-de-Atendimentos-Vendidos","Gerar-Email-Matricula","Editar-Orçamento")); ?>">
+                <a href="#">
+                    <i class="fa fa-book"></i>
+                    <span>Registrar</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="<?php echo check_active(array("Lista-de-Atendimentos-Vendidos")); ?>"><a href="index.php?page=Lista-de-Atendimentos-Vendidos"><i class="fa fa-bars"></i>Lista de Atendimento Vendidos</a></li>
+                </ul>
+            </li>
+
             
    <li class="<?php  if(isset($_GET["page"]) AND $_GET["page"]=="teste"){ echo "active"; } ?>">
                 <a href="index.php?page=teste">

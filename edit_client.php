@@ -5,6 +5,10 @@
     if(isset($_GET["client_id"])){
         $client->get_client($_GET["client_id"]);
     }
+    $father= new Client();
+    $mother= new Client();
+    $father->get_client($client->get_father_id());
+    $mother->get_client($client->get_mother_id());
 ?>
   <script type="text/javascript" >
 
@@ -158,143 +162,495 @@
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <form id="client_form" method="POST" role="form" class="half-form" action="client_information.php?page=edit&client_id=<?php echo $_GET["client_id"];?>">
-                        	<label class="control-label"><h4>Dados do Cliente</h4></label>
-                            <div class="form-group">
-								<label class="control-label">Nome</label>								 
-									<input type="text" class="form-control" id="client_name" value="<?php echo $client->client_name;?>" name="client_name" placeholder="Nome do Cliente"  />
-                            </div>
-							<div class="form-group">
-								<label class="control-label">Sobrenome</label>								 
-									 <input type="text" class="form-control" id="client_surname" value="<?php echo $client->client_surname;?>" name="client_surname" placeholder="Sobrenome do Cliente"   />
-                            </div>
-							<div class="form-group">
-								<label class="control-label">Telefone</label>
-									<input type="text" class="form-control" id="client_phone" value="<?php echo $client->client_phone;?>" name="client_phone" placeholder="Telefone do Cliente" data-inputmask="'mask': '(99)9999-9999'" />
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Celular</label> 
-                                    <input type="text" class="form-control" id="client_mobile"  name="client_mobile" placeholder="Celular do Cliente" value="<?php echo $client->client_mobile; ?>" data-inputmask="'mask': '(99)99999-9999'"/>
-                            </div>                            
-							<div class="form-group">
-								<label class="control-label">E-mail</label>
-									<input type="text" class="form-control" id="client_email" value="<?php echo $client->client_email;?>" name="client_email" placeholder="E-mail do Cliente" data-inputmask="'alias': 'email'"  />
-                            </div>
-							<div class="form-group">
-								<label class="control-label">Como chegou até o Artha</label>
-									<input type="text" class="form-control" id="client_how_to_reach_us" value="<?php echo $client->client_how_to_reach_us;?>" name="client_how_to_reach_us" placeholder="Como chegou até o Artha" onfocus="active_autocomplete({id: this.id, target_field: 'client_how_to_reach_us', search_field: 'client_how_to_reach_us', table: 'digitulus_client'});" />
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Data de Nascimento</label>
-                                    <input type="text" class="form-control" id="client_date_of_birth" value="<?php echo $client->client_date_of_birth;?>" name="client_date_of_birth" placeholder="Data de Nascimento"/>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">CEP</label>                                    
-                                    <input type="text" class="form-control" id="client_cep" name="client_cep" placeholder="CEP" value="<?php echo $client->client_cep; ?>" data-inputmask="'mask': '99999-999'"/>
-                            </div>  
-                            <div class="form-group">
-                                <label class="control-label">Endereço</label>                                     
-                                    <input type="text" class="form-control" id="client_address" value="<?php echo $client->client_address;?>" name="client_address" placeholder="Endereço"   />
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Bairro</label>                                
-                                     <input type="text" class="form-control" id="client_neighbourhood" value="<?php echo $client->client_neighbourhood;?>" name="client_neighbourhood" placeholder="Bairro"  />
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Cidade</label>                                    
-                                    <input type="text" class="form-control" id="client_city" value="<?php echo $client->client_city;?>" name="client_city" placeholder="Cidade" onfocus="active_autocomplete({id: this.id, target_field: 'client_city', search_field: 'client_city', table: 'digitulus_client'});"  />
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Estado</label>                                  
-                                    <select class="form-control" id="client_state" name="client_state" placeholder="Estado">
-                                        <option value="<?php echo $client->client_state;?>"><?php echo $client->client_state;?></option>
-                                        <option value="Acre">Acre</option>
-                                        <option value="Alagoas">Alagoas</option>
-                                        <option value="Amapá">Amapá</option>
-                                        <option value="Amazonas">Amazonas</option>
-                                        <option value="Bahia">Bahia</option>
-                                        <option value="Ceará">Ceará</option>
-                                        <option value="Distrito Federal">Distrito Federal</option>
-                                        <option value="Espírito Santo">Espírito Santo</option>
-                                        <option value="Goiás">Goiás</option>
-                                        <option value="Maranhão">Maranhão</option>
-                                        <option value="Mato Grosso">Mato Grosso</option>
-                                        <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
-                                        <option value="Minas Gerais">Minas Gerais</option>
-                                        <option value="Pará">Pará</option>
-                                        <option value="Paraíba">Paraíba</option>
-                                        <option value="Paraná">Paraná</option>
-                                        <option value="Pernambuco">Pernambuco</option>
-                                        <option value="Piauí">Piauí</option>
-                                        <option value="Rio de Janeiro">Rio de Janeiro</option>
-                                        <option value="Rio Grande do Norte">Rio Grande do Norte</option>
-                                        <option value="Rio Grande do Sul">Rio Grande do Sul</option>
-                                        <option value="Rondônia">Rondônia</option>
-                                        <option value="Roraima">Roraima</option>
-                                        <option value="Santa Catarina">Santa Catarina</option>
-                                        <option value="São Paulo">São Paulo</option>
-                                        <option value="Sergipe">Sergipe</option>
-                                        <option value="Tocantins">Tocantins</option>
-                                    </select>
-                            </div>     
-                            <div class="form-group">
-                                <label class="control-label">Sexo</label>  
-                                    <select class="form-control" id="client_gender" name="client_gender" placeholder="Sexo">
-                                        <option value="<?php echo $client->client_gender;?>"><?php echo $client->client_gender;?></option>
-                                        <option value="Feminino">Feminino</option>
-                                        <option value="Masculino">Masculino</option>
-                                    </select>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Estado Civil</label> 
-                                    <select class="form-control" id="client_civil_status" name="client_civil_status" placeholder="Estado Civil">
-                                        Solteiro Casado Em União Estável Divorciado Separado Viúvo
-                                        <option value="<?php echo $client->client_civil_status;?>"><?php echo $client->client_civil_status;?></option>
-                                        <option value="Solteiro">Solteiro</option>
-                                        <option value="Casado">Casado</option>
-                                        <option value="Em União Estável">Em União Estável</option>
-                                        <option value="Divorciado">Divorciado</option>
-                                        <option value="Separado">Separado</option>
-                                        <option value="Viúvo">Viúvo</option>
-                                    </select>
-                            </div>                            
-                            <div class="form-group">
-                                <label class="control-label">Profissão</label>   
-                                    <input type="text" class="form-control" id="client_profession" name="client_profession" placeholder="Profissão" value="<?php echo $client->client_profession; ?>" onfocus="active_autocomplete({id: this.id, target_field: 'client_profession', search_field: 'client_profession', table: 'digitulus_client'});" />
-                            </div>  
-                            <div class="form-group">
-                                <label class="control-label">Passaporte</label>    
-                                    <input type="text" class="form-control" id="client_passport" value="<?php echo $client->client_passport;?>" name="client_passport" placeholder="Passaporte" data-inputmask="'mask': 'AA999999'"  />
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Data de validade do passaporte</label>
-                                    <input type="text" class="form-control" id="client_passport_expire_date" value="<?php echo $client->client_passport_expire_date;?>" name="client_passport_expire_date" placeholder="Data de validade do passaporte"   />
-                            </div>
-                            <div class="form-group" id="cpf_div">
-                                <label class="control-label" id="cpf_label">CPF</label>
-                                    <input type="text" class="form-control" id="client_cpf" value="<?php echo $client->client_cpf;?>" name="client_cpf" placeholder="CPF" onblur="TestaCPF();" data-inputmask="'mask':'999.999.999-99'"  />
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">RG</label>
-                                    <input type="text" class="form-control" id="client_rg" value="<?php echo $client->client_rg;?>" name="client_rg" placeholder="RG" />
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Outras informações</label>
-                                    <input type="text" class="form-control" id="client_other_information" name="client_other_information" placeholder="Outras informações" value="<?php echo $client->client_other_information; ?>"  />
-                            </div>                             
-                            <div class="form-group">
-                                <label class="control-label">Nome da pessoa de contato</label>
-                                    <input type="text" class="form-control" id="client_contact_name" value="<?php echo $client->client_contact_name;?>" name="client_contact_name" placeholder="Nome da pessoa de contato"  />
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Relação com a pessoa de contato</label>
-                                    <input type="text" class="form-control" id="client_contact_relation" value="<?php echo $client->client_contact_relation;?>" name="client_contact_relation" placeholder="Relação com a pessoa de contato"  />
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Telefone da pessoa de contato</label>
-                                    <input type="text" class="form-control" id="client_contact_phone" value="<?php echo $client->client_contact_phone;?>" name="client_contact_phone" placeholder="Telefone da pessoa de contato" />
-                            </div>			
-							<div class="form-group">
-									<button class="btn btn-primary" id="submit_form" type="submit">Salvar</button>
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <label class="control-label"><h4>Dados do Cliente</h4></label>
+                                    <div class="form-group" hidden="hidden">
+                                        <label class="control-label">Id do Cliente</label>
+                                            <input type="text" class="form-control" id="client_id" name="client_id" placeholder="Id do Cliente" value="<?php echo $_GET["client_id"];?>" />
+                                    </div>
+                                    <div class="form-group">
+        								<label class="control-label">Nome</label>								 
+        									<input type="text" class="form-control" id="client_name" value="<?php echo $client->client_name;?>" name="client_name" placeholder="Nome do Cliente"  />
+                                    </div>
+        							<div class="form-group">
+        								<label class="control-label">Sobrenome</label>								 
+        									 <input type="text" class="form-control" id="client_surname" value="<?php echo $client->client_surname;?>" name="client_surname" placeholder="Sobrenome do Cliente"   />
+                                    </div>
+        							<div class="form-group">
+        								<label class="control-label">Telefone</label>
+        									<input type="text" class="form-control" id="client_phone" value="<?php echo $client->client_phone;?>" name="client_phone" placeholder="Telefone do Cliente" data-inputmask="'mask': '(99)9999-9999'" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Celular</label> 
+                                            <input type="text" class="form-control" id="client_mobile"  name="client_mobile" placeholder="Celular do Cliente" value="<?php echo $client->client_mobile; ?>" data-inputmask="'mask': '(99)99999-9999'"/>
+                                    </div>                            
+        							<div class="form-group">
+        								<label class="control-label">E-mail</label>
+        									<input type="text" class="form-control" id="client_email" value="<?php echo $client->client_email;?>" name="client_email" placeholder="E-mail do Cliente" data-inputmask="'alias': 'email'"  />
+                                    </div>
+        							<div class="form-group">
+        								<label class="control-label">Como chegou até o Artha</label>
+        									<input type="text" class="form-control" id="client_how_to_reach_us" value="<?php echo $client->client_how_to_reach_us;?>" name="client_how_to_reach_us" placeholder="Como chegou até o Artha" onfocus="active_autocomplete({id: this.id, target_field: 'client_how_to_reach_us', search_field: 'client_how_to_reach_us', table: 'digitulus_client'});" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Data de Nascimento</label>
+                                            <input type="text" class="form-control" id="client_date_of_birth" value="<?php echo $client->client_date_of_birth;?>" name="client_date_of_birth" placeholder="Data de Nascimento"/>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">CEP</label>                                    
+                                            <input type="text" class="form-control" id="client_cep" name="client_cep" placeholder="CEP" value="<?php echo $client->client_cep; ?>" data-inputmask="'mask': '99999-999'"/>
+                                    </div>  
+                                    <div class="form-group">
+                                        <label class="control-label">Endereço</label>                                     
+                                            <input type="text" class="form-control" id="client_address" value="<?php echo $client->client_address;?>" name="client_address" placeholder="Endereço"   />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Bairro</label>                                
+                                             <input type="text" class="form-control" id="client_neighbourhood" value="<?php echo $client->client_neighbourhood;?>" name="client_neighbourhood" placeholder="Bairro"  />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Cidade</label>                                    
+                                            <input type="text" class="form-control" id="client_city" value="<?php echo $client->client_city;?>" name="client_city" placeholder="Cidade" onfocus="active_autocomplete({id: this.id, target_field: 'client_city', search_field: 'client_city', table: 'digitulus_client'});"  />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Estado</label>                                  
+                                            <select class="form-control" id="client_state" name="client_state" placeholder="Estado">
+                                                <option value="<?php echo $client->client_state;?>"><?php echo $client->client_state;?></option>
+                                                <option value="Acre">Acre</option>
+                                                <option value="Alagoas">Alagoas</option>
+                                                <option value="Amapá">Amapá</option>
+                                                <option value="Amazonas">Amazonas</option>
+                                                <option value="Bahia">Bahia</option>
+                                                <option value="Ceará">Ceará</option>
+                                                <option value="Distrito Federal">Distrito Federal</option>
+                                                <option value="Espírito Santo">Espírito Santo</option>
+                                                <option value="Goiás">Goiás</option>
+                                                <option value="Maranhão">Maranhão</option>
+                                                <option value="Mato Grosso">Mato Grosso</option>
+                                                <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
+                                                <option value="Minas Gerais">Minas Gerais</option>
+                                                <option value="Pará">Pará</option>
+                                                <option value="Paraíba">Paraíba</option>
+                                                <option value="Paraná">Paraná</option>
+                                                <option value="Pernambuco">Pernambuco</option>
+                                                <option value="Piauí">Piauí</option>
+                                                <option value="Rio de Janeiro">Rio de Janeiro</option>
+                                                <option value="Rio Grande do Norte">Rio Grande do Norte</option>
+                                                <option value="Rio Grande do Sul">Rio Grande do Sul</option>
+                                                <option value="Rondônia">Rondônia</option>
+                                                <option value="Roraima">Roraima</option>
+                                                <option value="Santa Catarina">Santa Catarina</option>
+                                                <option value="São Paulo">São Paulo</option>
+                                                <option value="Sergipe">Sergipe</option>
+                                                <option value="Tocantins">Tocantins</option>
+                                            </select>
+                                    </div>     
+                                    <div class="form-group">
+                                        <label class="control-label">Sexo</label>  
+                                            <select class="form-control" id="client_gender" name="client_gender" placeholder="Sexo">
+                                                <option value="<?php echo $client->client_gender;?>"><?php echo $client->client_gender;?></option>
+                                                <option value="Feminino">Feminino</option>
+                                                <option value="Masculino">Masculino</option>
+                                            </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Estado Civil</label> 
+                                            <select class="form-control" id="client_civil_status" name="client_civil_status" placeholder="Estado Civil">
+                                                Solteiro Casado Em União Estável Divorciado Separado Viúvo
+                                                <option value="<?php echo $client->client_civil_status;?>"><?php echo $client->client_civil_status;?></option>
+                                                <option value="Solteiro">Solteiro</option>
+                                                <option value="Casado">Casado</option>
+                                                <option value="Em União Estável">Em União Estável</option>
+                                                <option value="Divorciado">Divorciado</option>
+                                                <option value="Separado">Separado</option>
+                                                <option value="Viúvo">Viúvo</option>
+                                            </select>
+                                    </div>                            
+                                    <div class="form-group">
+                                        <label class="control-label">Profissão</label>   
+                                            <input type="text" class="form-control" id="client_profession" name="client_profession" placeholder="Profissão" value="<?php echo $client->client_profession; ?>" onfocus="active_autocomplete({id: this.id, target_field: 'client_profession', search_field: 'client_profession', table: 'digitulus_client'});" />
+                                    </div>  
+                                    <div class="form-group">
+                                        <label class="control-label">Passaporte</label>    
+                                            <input type="text" class="form-control" id="client_passport" value="<?php echo $client->client_passport;?>" name="client_passport" placeholder="Passaporte" data-inputmask="'mask': 'AA999999'"  />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Data de validade do passaporte</label>
+                                            <input type="text" class="form-control" id="client_passport_expire_date" value="<?php echo $client->client_passport_expire_date;?>" name="client_passport_expire_date" placeholder="Data de validade do passaporte"   />
+                                    </div>
+                                    <div class="form-group" id="cpf_div">
+                                        <label class="control-label" id="cpf_label">CPF</label>
+                                            <input type="text" class="form-control" id="client_cpf" value="<?php echo $client->client_cpf;?>" name="client_cpf" placeholder="CPF" onblur="TestaCPF();" data-inputmask="'mask':'999.999.999-99'"  />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">RG</label>
+                                            <input type="text" class="form-control" id="client_rg" value="<?php echo $client->client_rg;?>" name="client_rg" placeholder="RG" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Outras informações</label>
+                                            <textarea class="form-control" id="client_other_information" name="client_other_information" placeholder="Outras informações" value="<?php echo $client->client_other_information; ?>"  /></textarea>
+                                    </div>                             
+                                    <div class="form-group">
+                                        <label class="control-label">Nome da pessoa de contato</label>
+                                            <input type="text" class="form-control" id="client_contact_name" value="<?php echo $client->client_contact_name;?>" name="client_contact_name" placeholder="Nome da pessoa de contato"  />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Relação com a pessoa de contato</label>
+                                            <input type="text" class="form-control" id="client_contact_relation" value="<?php echo $client->client_contact_relation;?>" name="client_contact_relation" placeholder="Relação com a pessoa de contato"  />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Telefone da pessoa de contato</label>
+                                            <input type="text" class="form-control" id="client_contact_phone" value="<?php echo $client->client_contact_phone;?>" name="client_contact_phone" placeholder="Telefone da pessoa de contato" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Email da pessoa de contato</label>
+                                            <input type="text" class="form-control" id="client_contact_email" value="<?php echo $client->client_contact_email;?>" name="client_contact_email" placeholder="Email da pessoa de contato" />
+                                    </div>  			
+        							<div class="form-group">
+        									<button class="btn btn-primary" id="submit_form" type="submit">Salvar</button>
+                                    </div>
+                                </div>
+                                <div class="col-xs-3">
+                                    <!-- Box Com as Infomações do Pai  -->
+                                    <div class="box box-warning collapsed-box" id="client-info">
+                                        <div class="box-header">
+                                            <!-- tools box -->
+                                            <div class="pull-right box-tools">
+                                                <!--Botão de minimizar div-->
+                                                <label class="btn btn-warning btn-sm" data-widget='collapse' data-toggle="tooltip" title="Mostrar/Esconder"><i class="fa fa-eye"></i>Mostrar/Esconder</label>
+                                                <label onclick="clean_form('father');" class="btn btn-warning btn-sm" data-widget='collapse' data-toggle="tooltip" title="Limpar Informações do Pai"><i class="fa fa-eraser"></i>Remover Relação</label>
+                                            </div><!-- /. tools -->
+                                            <i class="fa fa-fw fa-user"></i>
+
+                                            <h3 class="box-title">Informações do Pai</h3>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body no-padding" style="display: none;">
+                                            <div class="pad">
+                                                <div class="form-group">
+                                                    <label class="control-label"><h3 class="text-red"><b>Buscar Pai</b></h3></label>
+                                                        <input type="text" class="form-control" id="father_search" name="father_search" onfocus="active_autocomplete({id: this.id, target_field: 'client_id,client_name,client_surname,client_phone,client_mobile,client_email', search_field: 'client_name', table: 'digitulus_client', validate: 'true'});" placeholder="Buscar Pai" />
+                                                </div>
+                                                <div class="form-group" hidden="hidden">
+                                                    <label class="control-label">Id do Pai</label>
+                                                        <input type="text" class="form-control" id="father_id" name="father_id" placeholder="Id do Pai" value="<?php echo $father->client_id;?>" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Nome</label>                                
+                                                        <input type="text" class="form-control" id="father_name" value="<?php echo $father->client_name;?>" name="father_name" placeholder="Nome do Pai"  />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Sobrenome</label>                               
+                                                         <input type="text" class="form-control" id="father_surname" value="<?php echo $father->client_surname;?>" name="father_surname" placeholder="Sobrenome do Pai"   />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Telefone</label>
+                                                        <input type="text" class="form-control" id="father_phone" value="<?php echo $father->client_phone;?>" name="father_phone" placeholder="Telefone do Pai" data-inputmask="'mask': '(99)9999-9999'" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Celular</label> 
+                                                        <input type="text" class="form-control" id="father_mobile"  name="father_mobile" placeholder="Celular do Pai" value="<?php echo $father->client_mobile; ?>" data-inputmask="'mask': '(99)99999-9999'"/>
+                                                </div>                            
+                                                <div class="form-group">
+                                                    <label class="control-label">E-mail</label>
+                                                        <input type="text" class="form-control" id="father_email" value="<?php echo $father->client_email;?>" name="father_email" placeholder="E-mail do Pai" data-inputmask="'alias': 'email'"  />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Como chegou até o Artha</label>
+                                                        <input type="text" class="form-control" id="father_how_to_reach_us" value="<?php echo $father->client_how_to_reach_us;?>" name="father_how_to_reach_us" placeholder="Como chegou até o Artha" onfocus="active_autocomplete({id: this.id, target_field: 'father_how_to_reach_us', search_field: 'father_how_to_reach_us', table: 'digitulus_father'});" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Data de Nascimento</label>
+                                                        <input type="text" class="form-control" id="father_date_of_birth" value="<?php echo $father->client_date_of_birth;?>" name="father_date_of_birth" placeholder="Data de Nascimento"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">CEP</label>                                    
+                                                        <input type="text" class="form-control" id="father_cep" name="father_cep" placeholder="CEP" value="<?php echo $father->client_cep; ?>" data-inputmask="'mask': '99999-999'"/>
+                                                </div>  
+                                                <div class="form-group">
+                                                    <label class="control-label">Endereço</label>                                     
+                                                        <input type="text" class="form-control" id="father_address" value="<?php echo $father->client_address;?>" name="father_address" placeholder="Endereço"   />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Bairro</label>                                
+                                                         <input type="text" class="form-control" id="father_neighbourhood" value="<?php echo $father->client_neighbourhood;?>" name="father_neighbourhood" placeholder="Bairro"  />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Cidade</label>                                    
+                                                        <input type="text" class="form-control" id="father_city" value="<?php echo $father->client_city;?>" name="father_city" placeholder="Cidade" onfocus="active_autocomplete({id: this.id, target_field: 'father_city', search_field: 'father_city', table: 'digitulus_father'});"  />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Estado</label>                                  
+                                                        <select class="form-control" id="father_state" name="father_state" placeholder="Estado">
+                                                            <option value="<?php echo $father->client_state;?>"><?php echo $father->client_state;?></option>
+                                                            <option value="Acre">Acre</option>
+                                                            <option value="Alagoas">Alagoas</option>
+                                                            <option value="Amapá">Amapá</option>
+                                                            <option value="Amazonas">Amazonas</option>
+                                                            <option value="Bahia">Bahia</option>
+                                                            <option value="Ceará">Ceará</option>
+                                                            <option value="Distrito Federal">Distrito Federal</option>
+                                                            <option value="Espírito Santo">Espírito Santo</option>
+                                                            <option value="Goiás">Goiás</option>
+                                                            <option value="Maranhão">Maranhão</option>
+                                                            <option value="Mato Grosso">Mato Grosso</option>
+                                                            <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
+                                                            <option value="Minas Gerais">Minas Gerais</option>
+                                                            <option value="Pará">Pará</option>
+                                                            <option value="Paraíba">Paraíba</option>
+                                                            <option value="Paraná">Paraná</option>
+                                                            <option value="Pernambuco">Pernambuco</option>
+                                                            <option value="Piauí">Piauí</option>
+                                                            <option value="Rio de Janeiro">Rio de Janeiro</option>
+                                                            <option value="Rio Grande do Norte">Rio Grande do Norte</option>
+                                                            <option value="Rio Grande do Sul">Rio Grande do Sul</option>
+                                                            <option value="Rondônia">Rondônia</option>
+                                                            <option value="Roraima">Roraima</option>
+                                                            <option value="Santa Catarina">Santa Catarina</option>
+                                                            <option value="São Paulo">São Paulo</option>
+                                                            <option value="Sergipe">Sergipe</option>
+                                                            <option value="Tocantins">Tocantins</option>
+                                                        </select>
+                                                </div>     
+                                                <div class="form-group">
+                                                    <label class="control-label">Sexo</label>  
+                                                        <select class="form-control" id="father_gender" name="father_gender" placeholder="Sexo">
+                                                            <option value="<?php echo $father->client_gender;?>"><?php echo $father->client_gender;?></option>
+                                                            <option value="Feminino">Feminino</option>
+                                                            <option value="Masculino">Masculino</option>
+                                                        </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Estado Civil</label> 
+                                                        <select class="form-control" id="father_civil_status" name="father_civil_status" placeholder="Estado Civil">
+                                                            Solteiro Casado Em União Estável Divorciado Separado Viúvo
+                                                            <option value="<?php echo $father->client_civil_status;?>"><?php echo $father->client_civil_status;?></option>
+                                                            <option value="Solteiro">Solteiro</option>
+                                                            <option value="Casado">Casado</option>
+                                                            <option value="Em União Estável">Em União Estável</option>
+                                                            <option value="Divorciado">Divorciado</option>
+                                                            <option value="Separado">Separado</option>
+                                                            <option value="Viúvo">Viúvo</option>
+                                                        </select>
+                                                </div>                            
+                                                <div class="form-group">
+                                                    <label class="control-label">Profissão</label>   
+                                                        <input type="text" class="form-control" id="father_profession" name="father_profession" placeholder="Profissão" value="<?php echo $father->client_profession; ?>" onfocus="active_autocomplete({id: this.id, target_field: 'father_profession', search_field: 'father_profession', table: 'digitulus_father'});" />
+                                                </div>  
+                                                <div class="form-group">
+                                                    <label class="control-label">Passaporte</label>    
+                                                        <input type="text" class="form-control" id="father_passport" value="<?php echo $father->client_passport;?>" name="father_passport" placeholder="Passaporte" data-inputmask="'mask': 'AA999999'"  />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Data de validade do passaporte</label>
+                                                        <input type="text" class="form-control" id="father_passport_expire_date" value="<?php echo $father->client_passport_expire_date;?>" name="father_passport_expire_date" placeholder="Data de validade do passaporte"   />
+                                                </div>
+                                                <div class="form-group" id="cpf_div">
+                                                    <label class="control-label" id="cpf_label">CPF</label>
+                                                        <input type="text" class="form-control" id="father_cpf" value="<?php echo $father->client_cpf;?>" name="father_cpf" placeholder="CPF" onblur="TestaCPF();" data-inputmask="'mask':'999.999.999-99'"  />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">RG</label>
+                                                        <input type="text" class="form-control" id="father_rg" value="<?php echo $father->client_rg;?>" name="father_rg" placeholder="RG" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Outras informações</label>
+                                                        <textarea class="form-control" id="father_other_information" name="father_other_information" placeholder="Outras informações" value="<?php echo $father->client_other_information; ?>"  /></textarea>
+                                                </div>                             
+                                                <div class="form-group">
+                                                    <label class="control-label">Nome da pessoa de contato</label>
+                                                        <input type="text" class="form-control" id="father_contact_name" value="<?php echo $father->client_contact_name;?>" name="father_contact_name" placeholder="Nome da pessoa de contato"  />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Relação com a pessoa de contato</label>
+                                                        <input type="text" class="form-control" id="father_contact_relation" value="<?php echo $father->client_contact_relation;?>" name="father_contact_relation" placeholder="Relação com a pessoa de contato"  />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Telefone da pessoa de contato</label>
+                                                        <input type="text" class="form-control" id="father_contact_phone" value="<?php echo $father->client_contact_phone;?>" name="father_contact_phone" placeholder="Telefone da pessoa de contato" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Email da pessoa de contato</label>
+                                                        <input type="text" class="form-control" id="father_contact_email" value="<?php echo $father->client_contact_email;?>" name="father_contact_email" placeholder="Email da pessoa de contato" />
+                                                </div> 
+                                            </div><!-- /.pad -->
+                                        </div><!-- /.box-body -->
+                                        <div class="box-footer" style="display: none;">
+                                            <div class="row">
+                                            </div><!-- /.row -->
+                                        </div><!-- /.box-footer -->
+                                    </div><!-- /.box -->
+                                </div>
+                                <div class="col-xs-3">
+                                    <!-- Box Com as Infomações da Mãe  -->
+                                    <div class="box box-warning collapsed-box" id="client-info">
+                                        <div class="box-header">
+                                            <!-- tools box -->
+                                            <div class="pull-right box-tools">
+                                                <!--Botão de minimizar div-->
+                                                <label class="btn btn-warning btn-sm" data-widget='collapse' data-toggle="tooltip" title="Mostrar/Esconder"><i class="fa fa-eye"></i>Mostrar/Esconder</label>
+                                                <label onclick="clean_form('mother');" class="btn btn-warning btn-sm" data-widget='collapse' data-toggle="tooltip" title="Limpar Informações da Mãe"><i class="fa fa-eraser"></i>Remover Relação</label>
+                                            </div><!-- /. tools -->
+                                            <i class="fa fa-fw fa-user"></i>
+
+                                            <h3 class="box-title">Informações da Mãe</h3>
+                                        </div><!-- /.box-header -->
+                                        <div class="box-body no-padding" style="display: none;">
+                                            <div class="pad">
+                                                <div class="form-group">
+                                                    <label class="control-label"><h3 class="text-red"><b>Buscar Mãe</b></h3></label>
+                                                        <input type="text" class="form-control" id="mother_search" name="mother_search" onfocus="active_autocomplete({id: this.id, target_field: 'client_id,client_name,client_surname,client_phone,client_mobile,client_email', search_field: 'client_name', table: 'digitulus_client', validate: 'true'});" placeholder="Buscar Mãe" />
+                                                </div>
+                                                <div class="form-group" hidden="hidden">
+                                                    <label class="control-label">Id da Mãe</label>
+                                                        <input type="text" class="form-control" id="mother_id" name="mother_id" placeholder="Id da Mãe" value="<?php echo $mother->client_id;?>" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Nome</label>                                
+                                                        <input type="text" class="form-control" id="mother_name" value="<?php echo $mother->client_name;?>" name="mother_name" placeholder="Nome da Mãe"  />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Sobrenome</label>                               
+                                                         <input type="text" class="form-control" id="mother_surname" value="<?php echo $mother->client_surname;?>" name="mother_surname" placeholder="Sobrenome da Mãe"   />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Telefone</label>
+                                                        <input type="text" class="form-control" id="mother_phone" value="<?php echo $mother->client_phone;?>" name="mother_phone" placeholder="Telefone da Mãe" data-inputmask="'mask': '(99)9999-9999'" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Celular</label> 
+                                                        <input type="text" class="form-control" id="mother_mobile"  name="mother_mobile" placeholder="Celular da Mãe" value="<?php echo $mother->client_mobile; ?>" data-inputmask="'mask': '(99)99999-9999'"/>
+                                                </div>                            
+                                                <div class="form-group">
+                                                    <label class="control-label">E-mail</label>
+                                                        <input type="text" class="form-control" id="mother_email" value="<?php echo $mother->client_email;?>" name="mother_email" placeholder="E-mail da Mãe" data-inputmask="'alias': 'email'"  />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Como chegou até o Artha</label>
+                                                        <input type="text" class="form-control" id="mother_how_to_reach_us" value="<?php echo $mother->client_how_to_reach_us;?>" name="mother_how_to_reach_us" placeholder="Como chegou até o Artha" onfocus="active_autocomplete({id: this.id, target_field: 'mother_how_to_reach_us', search_field: 'mother_how_to_reach_us', table: 'digitulus_mother'});" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Data de Nascimento</label>
+                                                        <input type="text" class="form-control" id="mother_date_of_birth" value="<?php echo $mother->client_date_of_birth;?>" name="mother_date_of_birth" placeholder="Data de Nascimento"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">CEP</label>                                    
+                                                        <input type="text" class="form-control" id="mother_cep" name="mother_cep" placeholder="CEP" value="<?php echo $mother->client_cep; ?>" data-inputmask="'mask': '99999-999'"/>
+                                                </div>  
+                                                <div class="form-group">
+                                                    <label class="control-label">Endereço</label>                                     
+                                                        <input type="text" class="form-control" id="mother_address" value="<?php echo $mother->client_address;?>" name="mother_address" placeholder="Endereço"   />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Bairro</label>                                
+                                                         <input type="text" class="form-control" id="mother_neighbourhood" value="<?php echo $mother->client_neighbourhood;?>" name="mother_neighbourhood" placeholder="Bairro"  />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Cidade</label>                                    
+                                                        <input type="text" class="form-control" id="mother_city" value="<?php echo $mother->client_city;?>" name="mother_city" placeholder="Cidade" onfocus="active_autocomplete({id: this.id, target_field: 'mother_city', search_field: 'mother_city', table: 'digitulus_mother'});"  />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Estado</label>                                  
+                                                        <select class="form-control" id="mother_state" name="mother_state" placeholder="Estado">
+                                                            <option value="<?php echo $mother->client_state;?>"><?php echo $mother->client_state;?></option>
+                                                            <option value="Acre">Acre</option>
+                                                            <option value="Alagoas">Alagoas</option>
+                                                            <option value="Amapá">Amapá</option>
+                                                            <option value="Amazonas">Amazonas</option>
+                                                            <option value="Bahia">Bahia</option>
+                                                            <option value="Ceará">Ceará</option>
+                                                            <option value="Distrito Federal">Distrito Federal</option>
+                                                            <option value="Espírito Santo">Espírito Santo</option>
+                                                            <option value="Goiás">Goiás</option>
+                                                            <option value="Maranhão">Maranhão</option>
+                                                            <option value="Mato Grosso">Mato Grosso</option>
+                                                            <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
+                                                            <option value="Minas Gerais">Minas Gerais</option>
+                                                            <option value="Pará">Pará</option>
+                                                            <option value="Paraíba">Paraíba</option>
+                                                            <option value="Paraná">Paraná</option>
+                                                            <option value="Pernambuco">Pernambuco</option>
+                                                            <option value="Piauí">Piauí</option>
+                                                            <option value="Rio de Janeiro">Rio de Janeiro</option>
+                                                            <option value="Rio Grande do Norte">Rio Grande do Norte</option>
+                                                            <option value="Rio Grande do Sul">Rio Grande do Sul</option>
+                                                            <option value="Rondônia">Rondônia</option>
+                                                            <option value="Roraima">Roraima</option>
+                                                            <option value="Santa Catarina">Santa Catarina</option>
+                                                            <option value="São Paulo">São Paulo</option>
+                                                            <option value="Sergipe">Sergipe</option>
+                                                            <option value="Tocantins">Tocantins</option>
+                                                        </select>
+                                                </div>     
+                                                <div class="form-group">
+                                                    <label class="control-label">Sexo</label>  
+                                                        <select class="form-control" id="mother_gender" name="mother_gender" placeholder="Sexo">
+                                                            <option value="<?php echo $mother->client_gender;?>"><?php echo $mother->client_gender;?></option>
+                                                            <option value="Feminino">Feminino</option>
+                                                            <option value="Masculino">Masculino</option>
+                                                        </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Estado Civil</label> 
+                                                        <select class="form-control" id="mother_civil_status" name="mother_civil_status" placeholder="Estado Civil">
+                                                            Solteiro Casado Em União Estável Divorciado Separado Viúvo
+                                                            <option value="<?php echo $mother->client_civil_status;?>"><?php echo $mother->client_civil_status;?></option>
+                                                            <option value="Solteiro">Solteiro</option>
+                                                            <option value="Casado">Casado</option>
+                                                            <option value="Em União Estável">Em União Estável</option>
+                                                            <option value="Divorciado">Divorciado</option>
+                                                            <option value="Separado">Separado</option>
+                                                            <option value="Viúvo">Viúvo</option>
+                                                        </select>
+                                                </div>                            
+                                                <div class="form-group">
+                                                    <label class="control-label">Profissão</label>   
+                                                        <input type="text" class="form-control" id="mother_profession" name="mother_profession" placeholder="Profissão" value="<?php echo $mother->client_profession; ?>" onfocus="active_autocomplete({id: this.id, target_field: 'mother_profession', search_field: 'mother_profession', table: 'digitulus_mother'});" />
+                                                </div>  
+                                                <div class="form-group">
+                                                    <label class="control-label">Passaporte</label>    
+                                                        <input type="text" class="form-control" id="mother_passport" value="<?php echo $mother->client_passport;?>" name="mother_passport" placeholder="Passaporte" data-inputmask="'mask': 'AA999999'"  />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Data de validade do passaporte</label>
+                                                        <input type="text" class="form-control" id="mother_passport_expire_date" value="<?php echo $mother->client_passport_expire_date;?>" name="mother_passport_expire_date" placeholder="Data de validade do passaporte"   />
+                                                </div>
+                                                <div class="form-group" id="cpf_div">
+                                                    <label class="control-label" id="cpf_label">CPF</label>
+                                                        <input type="text" class="form-control" id="mother_cpf" value="<?php echo $mother->client_cpf;?>" name="mother_cpf" placeholder="CPF" onblur="TestaCPF();" data-inputmask="'mask':'999.999.999-99'"  />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">RG</label>
+                                                        <input type="text" class="form-control" id="mother_rg" value="<?php echo $mother->client_rg;?>" name="mother_rg" placeholder="RG" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Outras informações</label>
+                                                        <textarea class="form-control" id="mother_other_information" name="mother_other_information" placeholder="Outras informações" value="<?php echo $mother->client_other_information; ?>"  /></textarea>
+                                                </div>                             
+                                                <div class="form-group">
+                                                    <label class="control-label">Nome da pessoa de contato</label>
+                                                        <input type="text" class="form-control" id="mother_contact_name" value="<?php echo $mother->client_contact_name;?>" name="mother_contact_name" placeholder="Nome da pessoa de contato"  />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Relação com a pessoa de contato</label>
+                                                        <input type="text" class="form-control" id="mother_contact_relation" value="<?php echo $mother->client_contact_relation;?>" name="mother_contact_relation" placeholder="Relação com a pessoa de contato"  />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Telefone da pessoa de contato</label>
+                                                        <input type="text" class="form-control" id="mother_contact_phone" value="<?php echo $mother->client_contact_phone;?>" name="mother_contact_phone" placeholder="Telefone da pessoa de contato" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Email da pessoa de contato</label>
+                                                        <input type="text" class="form-control" id="mother_contact_email" value="<?php echo $mother->client_contact_email;?>" name="mother_contact_email" placeholder="Email da pessoa de contato" />
+                                                </div>
+                                            </div><!-- /.pad -->
+                                        </div><!-- /.box-body -->
+                                        <div class="box-footer" style="display: none;">
+                                            <div class="row">
+                                            </div><!-- /.row -->
+                                        </div><!-- /.box-footer -->
+                                    </div><!-- /.box -->
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -359,6 +715,139 @@ function TestaCPF() {
     }
 }
 
+//Busca do Pai, carrega no formulario todas as infromações recuperadas do pai 
+$("#father_search").change(function() {
+    var father_search=$("#father_search").val();
+    father_search=father_search.split("|");
+    father_id=father_search[0];
+    var father=ajax_db_return({search_word: father_id, target_field: "*", search_field: "client_id", table: "digitulus_client"});
+    
+    $("#father_id").val(father["client_id"]);
+    $("#father_name").val(father["client_name"]);
+    $("#father_surname").val(father["client_surname"]);
+    $("#father_phone").val(father["client_phone"]);
+    $("#father_mobile").val(father["client_mobile"]);
+    $("#father_email").val(father["client_email"]);
+    $("#father_client_how_to_reach_us").val(father["client_how_to_reach_us"]);
+    $("#father_date_of_birth").val(father["client_date_of_birth"]);
+    $("#father_cep").val(father["client_cep"]);
+    $("#father_address").val(father["client_address"]);
+    $("#father_neighbourhood").val(father["client_neighbourhood"]);
+    $("#father_city").val(father["client_city"]);
+    $("#father_state").val(father["client_state"]);
+    $("#father_gender").val(father["client_gender"]);
+    $("#father_civil_status").val(father["client_civil_status"]);
+    $("#father_profession").val(father["client_profession"]);
+    $("#father_passport").val(father["client_passport"]);
+    $("#father_cpf").val(father["client_cpf"]);
+    $("#father_rg").val(father["client_rg"]);
+    $("#father_passport_expire_date").val(father["client_passport_expire_date"]);
+    $("#father_other_information").val(father["client_other_information"]);
+    $("#father_contact_name").val(father["client_contact_name"]);
+    $("#client_contact_relation").val(father["client_contact_relation"]);
+    $("#father_contact_phone").val(father["client_contact_phone"]);
+    $("#father_contact_email").val(father["client_contact_email"]);
 
+});
+
+//Busca da Mãe, carrega no formulario todas as infromações recuperadas da mãe
+$("#mother_search").change(function() {
+    var mother_search=$("#mother_search").val();
+    mother_search=mother_search.split("|");
+    mother_id=mother_search[0];
+    var mother=ajax_db_return({search_word: mother_id, target_field: "*", search_field: "client_id", table: "digitulus_client"});
+    
+    $("#mother_id").val(mother["client_id"]);
+    $("#mother_name").val(mother["client_name"]);
+    $("#mother_surname").val(mother["client_surname"]);
+    $("#mother_phone").val(mother["client_phone"]);
+    $("#mother_mobile").val(mother["client_mobile"]);
+    $("#mother_email").val(mother["client_email"]);
+    $("#mother_client_how_to_reach_us").val(mother["client_how_to_reach_us"]);
+    $("#mother_date_of_birth").val(mother["client_date_of_birth"]);
+    $("#mother_cep").val(mother["client_cep"]);
+    $("#mother_address").val(mother["client_address"]);
+    $("#mother_neighbourhood").val(mother["client_neighbourhood"]);
+    $("#mother_city").val(mother["client_city"]);
+    $("#mother_state").val(mother["client_state"]);
+    $("#mother_gender").val(mother["client_gender"]);
+    $("#mother_civil_status").val(mother["client_civil_status"]);
+    $("#mother_profession").val(mother["client_profession"]);
+    $("#mother_passport").val(mother["client_passport"]);
+    $("#mother_cpf").val(mother["client_cpf"]);
+    $("#mother_rg").val(mother["client_rg"]);
+    $("#mother_passport_expire_date").val(mother["client_passport_expire_date"]);
+    $("#mother_other_information").val(mother["client_other_information"]);
+    $("#mother_contact_name").val(mother["client_contact_name"]);
+    $("#client_contact_relation").val(mother["client_contact_relation"]);
+    $("#mother_contact_phone").val(mother["client_contact_phone"]);
+    $("#mother_contact_email").val(mother["client_contact_email"]);
+
+});
+function ajax_db_return(){
+        //search_word= o que foi digitado no input
+        //target_field= o campo que será retornado na busca no bd
+        //search_field= o campo no bd em que o search_word será pesquisado
+        //table= tabela que sera pesquisada
+        //validate= bool para validar o campo apenas para aceitar os valores da lista
+        //extra_field=campo da clausula extra
+        //extra_clause=valor que será pesquisado na clausula extra  
+        var id=arguments[0]["id"],
+        search_word=arguments[0]["search_word"],
+        target_field=arguments[0]["target_field"],
+        search_field=arguments[0]["search_field"],
+        table=arguments[0]["table"],
+        validate=arguments[0]["validate"],
+        extra_clause=arguments[0]["extra_clause"],
+        extra_field=arguments[0]["extra_field"],
+        result;
+        $.ajax({
+            url:"ajax_db_return.php",
+            dataType: "json",
+            //faz com que a resposta do ajax seja sincrona
+            async: false,
+            data: {
+                search_word: search_word,
+                target_field: target_field,
+                search_field: search_field,  
+                table: table,
+                extra_clause: extra_clause,
+                extra_field: extra_field
+            },
+                success: function(data){
+                    result=data[0]
+                }
+        });
+        $('#'+id).val(result);
+        return result;
+}
+    function clean_form(form){
+        $("#"+form+"_search").val("");
+        $("#"+form+"_id").val("");
+        $("#"+form+"_name").val("");
+        $("#"+form+"_surname").val("");
+        $("#"+form+"_phone").val("");
+        $("#"+form+"_mobile").val("");
+        $("#"+form+"_email").val("");
+        $("#"+form+"_"+form+"_how_to_reach_us").val("");
+        $("#"+form+"_date_of_birth").val("");
+        $("#"+form+"_cep").val("");
+        $("#"+form+"_address").val("");
+        $("#"+form+"_neighbourhood").val("");
+        $("#"+form+"_city").val("");
+        $("#"+form+"_state").val("");
+        $("#"+form+"_gender").val("");
+        $("#"+form+"_civil_status").val("");
+        $("#"+form+"_profession").val("");
+        $("#"+form+"_passport").val("");
+        $("#"+form+"_cpf").val("");
+        $("#"+form+"_rg").val("");
+        $("#"+form+"_passport_expire_date").val("");
+        $("#"+form+"_other_information").val("");
+        $("#"+form+"_contact_name").val("");
+        $("#"+form+"_contact_relation").val("");
+        $("#"+form+"_contact_phone").val("");
+        $("#"+form+"_contact_email").val("");
+    }
 
 </script>

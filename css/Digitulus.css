@@ -14,14 +14,14 @@ body {
   background: #f9f9f9;
 }
 a {
-  color: #3c8dbc;
+  color: #0033cc;
 }
 a:hover,
 a:active,
 a:focus {
   outline: none;
   text-decoration: none;
-  color: #72afd2;
+  color: #0040ff;
 }
 /* Layouts */
 .wrapper {
@@ -475,8 +475,19 @@ span.login-title{
     color: #db6700;
 }
 body.login{
-    background-image: url(../img/blur-background07.jpg);
+    background: url(../img/blur-background07.jpg) no-repeat center center fixed;
     height: 969px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+body.orientacao{
+    background: url(../img/foto.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 @media screen and (max-width: 767px) {
   .right-side > .content-header > .breadcrumb {
@@ -3563,4 +3574,33 @@ label.error {
     padding: 3px;
 }
 
+.status_opportunity{
+  color: black;
+  font-weight: bold;
+}
+.status_vendido{
+  background-color: #27ae60;
+}
+.status_nao_vendido{
+  background-color: #c0392b;
+}
+.status_aguardar{
+  background-color: #f39c12;
+}
+.status_contatar{
+  background-color: #8e44ad;
+}
+.status_venda_futura{
+  background-color: #16a085;
+}
+.status_transferido{
+  background-color: #2980b9;
+}
 
+.orientacao-form{
+  background: rgba(0, 0, 0, 0.7); 
+  position: absolute;
+  width: 98.5%;
+  height: 97.5%;
+  z-index: 100;
+}

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
+-- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: 29-Out-2015 às 12:07
--- Versão do servidor: 5.6.17
--- PHP Version: 5.5.12
+-- Servidor: localhost
+-- Tempo de Geração: 25/01/2016 às 10:47
+-- Versão do servidor: 5.5.46-0ubuntu0.14.04.2
+-- Versão do PHP: 5.5.9-1ubuntu4.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `goarthacom`
+-- Banco de dados: `goarthacom`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `digitulus_budget`
+-- Estrutura para tabela `digitulus_budget`
 --
 
 CREATE TABLE IF NOT EXISTS `digitulus_budget` (
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `digitulus_budget` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Extraindo dados da tabela `digitulus_budget`
+-- Fazendo dump de dados para tabela `digitulus_budget`
 --
 
 INSERT INTO `digitulus_budget` (`sku_budget`, `currency_code`, `course_duration_value`, `course_gross_per_week`, `course_promo_per_week`, `course_commission`, `accommodation_duration_value`, `accommodation_per_week`, `discount_accommodation`, `accommodation_commission`, `material_fee_value`, `registration_fee_value`, `accommodation_fee_value`, `exam_fee_value`, `student_service_fee_value`, `courier_fee_value`, `airport_transfer_value`, `discount_fees_value`, `required_insurance_value`, `default_factor_profit`, `factor_profit`, `iata_arrival_at`, `price`, `special_price`, `cost`, `special_from_date`, `special_to_date`) VALUES

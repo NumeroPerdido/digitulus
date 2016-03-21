@@ -111,183 +111,7 @@
                         "url":"pagination/pagination_serverside.php",
                         "type": "POST"
                     },
-                    //quando a tabela acaba de carregar as cores das linhas das tabelas são mudadas de acordo com o status do oppotunity
-                    "initComplete": function () {
-                        $('#list_opportunity tbody tr').each( function () {
-                            //pega o nome da classa do tr
-                            var classe =$(this).attr('class');
-                            //pega o conteúdo do dentro da terceira coluna da respectiva linha
-                            var status=$(this).find('td:eq(2)').text();
-                            switch(status){
-                                //Cores para o Atendimento Fechado (Vendido)  
-                                case "Vendido":
-                                    //muda a cor da linha caso seja uma linha par
-                                    if(classe=="even"){
-                                        //cor inicial
-                                        $(this).css({"background-color": "#ccffcc"});
-                                        //cor do hover(parar o mouse em cima)
-                                        $(this).hover(function(){
-                                            $(this).css("background-color", "#B6B7B8");
-                                            }, function(){
-                                            //cor ao tirar o mouse
-                                            $(this).css("background-color", "#ccffcc");
-                                        });
-                                    }
-                                    //muda a cor da linha caso a linha seja ímpar
-                                    else{
-                                        //cor inicial
-                                        $(this).css({"background-color": "#99ff99"});
-                                        $(this).hover(function(){
-                                            //cor de hover(para o mouse em cima)
-                                            $(this).css("background-color", "#B6B7B8");
-                                            }, function(){
-                                            //cor ao tirar o mouse
-                                            $(this).css("background-color", "#99ff99");
-                                        });
-                                    }
-                                    break;
-                                //Cores para o Status Atendimento Não Fechado (Não Vendido) 
-                                case "Não Vendido":
-                                    //muda a cor da linha caso seja uma linha par
-                                    if(classe=="even"){
-                                        //cor inicial
-                                        $(this).css({"background-color": "#ffcc99"});
-                                        //cor do hover(parar o mouse em cima)
-                                        $(this).hover(function(){
-                                            $(this).css("background-color", "#B6B7B8");
-                                            }, function(){
-                                            //cor ao tirar o mouse
-                                            $(this).css("background-color", "#ffcc99");
-                                        });
-                                    }
-                                    //muda a cor da linha caso a linha seja ímpar
-                                    else{
-                                        //cor inicial
-                                        $(this).css({"background-color": "#ff9966"});
-                                        $(this).hover(function(){
-                                            //cor de hover(para o mouse em cima)
-                                            $(this).css("background-color", "#B6B7B8");
-                                            }, function(){
-                                            //cor ao tirar o mouse
-                                            $(this).css("background-color", "#ff9966");
-                                        });
-                                    }
-                                    break;
-                                //Cores para o Status Atendimento em Negociação que é preciso aguardar contato do cliente   
-                                case "Aguardar":
-                                    //muda a cor da linha caso seja uma linha par
-                                    if(classe=="even"){
-                                        //cor inicial
-                                        $(this).css({"background-color": "#ffffff"});
-                                        //cor do hover(parar o mouse em cima)
-                                        $(this).hover(function(){
-                                            $(this).css("background-color", "#B6B7B8");
-                                            }, function(){
-                                            //cor ao tirar o mouse
-                                            $(this).css("background-color", "#ffffff");
-                                        });
-                                    }
-                                    //muda a cor da linha caso a linha seja ímpar
-                                    else{
-                                        //cor inicial
-                                        $(this).css({"background-color": "#f2f2f2"});
-                                        $(this).hover(function(){
-                                            //cor de hover(para o mouse em cima)
-                                            $(this).css("background-color", "#B6B7B8");
-                                            }, function(){
-                                            //cor ao tirar o mouse
-                                            $(this).css("background-color", "#f2f2f2");
-                                        });
-                                    }
-                                    break;
-                                //Cores para o Status Atendimento em Negociação que é preciso contatar o cliente   
-                                case "Contatar":
-                                    //muda a cor da linha caso seja uma linha par
-                                    if(classe=="even"){
-                                        //cor inicial
-                                        $(this).css({"background-color": "#ffe5ff"});
-                                        //cor do hover(parar o mouse em cima)
-                                        $(this).hover(function(){
-                                            $(this).css("background-color", "#B6B7B8");
-                                            }, function(){
-                                            //cor ao tirar o mouse
-                                            $(this).css("background-color", "#ffe5ff");
-                                        });
-                                    }
-                                    //muda a cor da linha caso a linha seja ímpar
-                                    else{
-                                        //cor inicial
-                                        $(this).css({"background-color": "#ffccff"});
-                                        $(this).hover(function(){
-                                            //cor de hover(para o mouse em cima)
-                                            $(this).css("background-color", "#B6B7B8");
-                                            }, function(){
-                                            //cor ao tirar o mouse
-                                            $(this).css("background-color", "#ffccff");
-                                        });
-                                    }
-                                    break;
-                                
-                                //Cores para o Status Atendimento com possibilidade de Retorno    
-                                case "Venda Futura":
-                                    //muda a cor da linha caso seja uma linha par
-                                    if(classe=="even"){
-                                        //cor inicial
-                                        $(this).css({"background-color": "#ffffcc"});
-                                        //cor do hover(parar o mouse em cima)
-                                        $(this).hover(function(){
-                                            $(this).css("background-color", "#B6B7B8");
-                                            }, function(){
-                                            //cor ao tirar o mouse
-                                            $(this).css("background-color", "#ffffcc");
-                                        });
-                                    }
-                                    //muda a cor da linha caso a linha seja ímpar
-                                    else{
-                                        //cor inicial
-                                        $(this).css({"background-color": "#ffff99"});
-                                        $(this).hover(function(){
-                                            //cor de hover(para o mouse em cima)
-                                            $(this).css("background-color", "#B6B7B8");
-                                            }, function(){
-                                            //cor ao tirar o mouse
-                                            $(this).css("background-color", "#ffff99");
-                                        });
-                                    }
-                                    break;
-                                //Cores para o Status Atendimento Trasferido    
-                                case "Transferido":
-                                    //muda a cor da linha caso seja uma linha par
-                                    if(classe=="even"){
-                                        //cor inicial
-                                        $(this).css({"background-color": "#eafbfb"});
-                                        //cor do hover(parar o mouse em cima)
-                                        $(this).hover(function(){
-                                            $(this).css("background-color", "#B6B7B8");
-                                            }, function(){
-                                            //cor ao tirar o mouse
-                                            $(this).css("background-color", "#eafbfb");
-                                        });
-                                    }
-                                    //muda a cor da linha caso a linha seja ímpar
-                                    else{
-                                        //cor inicial
-                                        $(this).css({"background-color": "#d4f7f7"});
-                                        $(this).hover(function(){
-                                            //cor de hover(para o mouse em cima)
-                                            $(this).css("background-color", "#B6B7B8");
-                                            }, function(){
-                                            //cor ao tirar o mouse
-                                            $(this).css("background-color", "#d4f7f7");
-                                        });
-                                    }
-                                    break;
-                                    
-                            }
-                            
-                        } );
-                        
-                    },
+                    
                     "fnCreatedRow": function( nRow, ajax, iDataIndex ) {
                          // nRow - this is the HTML element of the row
                          // aData - array of the data in the columns. Get column 4 data: aData[3]
@@ -295,7 +119,11 @@
                          // Append to the first column
                          //Gera o link para edição na última coluna
                          $('td:eq(8)', nRow).html("<a href='index.php?page=Editar-Atendimento&opportunity_id="+ajax[0]+"&client_id="+ajax[8]+"''><i class='fa fa-edit'/>Continuar Atendimento</a>");
-//                         $('td:eq(9)', nRow).html("<a href='index.php?page=Concluir-Venda&opportunity_id="+ajax[0]+"&client_id="+ajax[8]+"''><i class='fa fa-check-square-o'/>Concluir Venda</a>");
+                         $('td:eq(9)', nRow).html("<a href='index.php?page=Concluir-Venda&opportunity_id="+ajax[0]+"&client_id="+ajax[8]+"''><i class='fa fa-check-square-o'/>Concluir Venda</a>");
+                        
+                        //função para colorir a tabela de acordo com o status
+                        //nRow é o elemento HTML da linha, iDataIndex é o número da linha, e ajax[2]/status é o status do atendimento
+                        color_row(nRow,iDataIndex,ajax[2]);
                     },
                 } );
                 //Coloca o input pra busca no head de cada coluna

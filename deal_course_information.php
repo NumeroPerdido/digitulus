@@ -16,6 +16,7 @@
                 $deal_course->deal_course_user_id = $_SESSION["user"]->user_id;
                 if(isset($_GET['opportunity_id'])){
                     $deal_course->deal_course_opportunity_id = $_GET['opportunity_id'];
+                    $opportunity->get_opportunity($_GET['opportunity_id']);
                 }
                 if(isset($_POST['deal_course_user_id'])){
                     $deal_course->deal_course_user_id = $_POST['deal_course_user_id'];
@@ -50,8 +51,8 @@
                 if(isset($_POST['finish_date'])){
                     $deal_course->finish_date = $_POST['finish_date'];
                 }
-                if(isset($_POST['currency_code'])){
-                    $deal_course->currency_code = $_POST['currency_code'];
+                if(isset($_POST['currency_name'])){
+                    $deal_course->currency_name = $_POST['currency_name'];
                 }
                 if(isset($_POST['banking_fee_value'])){
                     $deal_course->banking_fee_value = $_POST['banking_fee_value'];
@@ -67,6 +68,9 @@
                 }
                 if(isset($_POST['others_value'])){
                     $deal_course->others_value = $_POST['others_value'];
+                }
+                if(isset($_POST['others_value_description'])){
+                    $deal_course->others_value_description = $_POST['others_value_description'];
                 }
                 if(isset($_POST['accommodation_type'])){
                     $deal_course->accommodation_type = $_POST['accommodation_type'];
@@ -98,17 +102,31 @@
                 if(isset($_POST['airport_transfer_value'])){
                     $deal_course->airport_transfer_value = $_POST['airport_transfer_value'];
                 }
-                if(isset($_POST['extra_nights'])){
-                    $deal_course->extra_nights = $_POST['extra_nights'];
+                if(isset($_POST['extra_night'])){
+                    $deal_course->extra_night = $_POST['extra_night'];
+                }
+                if(isset($_POST['extra_night_value'])){
+                    $deal_course->extra_night_value = $_POST['extra_night_value'];
+                }
+                if(isset($_POST['deal_date'])){
+                    $opportunity->deal_date = $_POST['deal_date'];
+                }
+                if(isset($_POST['total_value'])){
+                    $opportunity->opportunity_total_value = $_POST['opportunity_total_value'];
+                }
+                if(isset($_POST['opportunity_total_inflow_date'])){
+                    $opportunity->opportunity_total_inflow_date = $_POST['opportunity_total_inflow_date'];
                 }
                 $resp=$deal_course->insert_deal_course();
+                $opportunity->update_opportunity($opportunity->opportunity_id);
                 $deal_course_id=$resp[0]["LAST_INSERT_ID()"];
                 header('Location: PHPWord/generate_contract.php?opportunity_id='.$deal_course->deal_course_opportunity_id.'&deal_course_id='.$deal_course_id);
+                exit;
 //                header('Location:index.php?page=Lista-de-Orcamentos&success=add');
             }
             elseif ($operation =="edit")
             {
-                $deal_course->deal_course_id = $_POST['deal_course_id'];
+                $deal_course->deal_course_id = $_GET['deal_course_id'];
                 $deal_course->deal_course_opportunity_id = $_POST['deal_course_opportunity_id'];
                 $deal_course->deal_course_user_id = $_POST['deal_course_user_id'];
                 $deal_course->country = $_POST['country'];
@@ -121,12 +139,13 @@
                 $deal_course->start_date = $_POST['start_date'];
                 $deal_course->duration = $_POST['duration'];
                 $deal_course->finish_date = $_POST['finish_date'];
-                $deal_course->currency_code = $_POST['currency_code'];
+                $deal_course->currency_name = $_POST['currency_name'];
                 $deal_course->banking_fee_value = $_POST['banking_fee_value'];
                 $deal_course->registration_fee_value = $_POST['registration_fee_value'];
                 $deal_course->course_value = $_POST['course_value'];
                 $deal_course->material_fee_value = $_POST['material_fee_value'];
                 $deal_course->others_value = $_POST['others_value'];
+                $deal_course->others_value_description = $_POST['others_value_description'];
                 $deal_course->accommodation_type = $_POST['accommodation_type'];
                 $deal_course->room = $_POST['room'];
                 $deal_course->meals = $_POST['meals'];
@@ -137,24 +156,20 @@
                 $deal_course->accommodation_value = $_POST['accommodation_value'];
                 $deal_course->required_insurance_value = $_POST['required_insurance_value'];
                 $deal_course->airport_transfer_value = $_POST['airport_transfer_value'];
-                $deal_course->extra_nights = $_POST['extra_nights'];
-			    $deal_course->update_deal_course();
-                header('Location:index.php?page=Lista-de-Orcamentos&success=edit');
+                $deal_course->extra_night = $_POST['extra_night'];
+                $deal_course->extra_night_value = $_POST['extra_night_value'];
+			    $deal_course->update_deal_course($_GET['deal_course_id']);
+                header('Location:index.php?page=Lista-de-Atendimentos-Vendidos&success=edit');
+                exit;
             }
             elseif ($operation =="delete") 
             {
                 $deal_course->deal_course_id = $_GET["deal_course_id"];
                 $deal_course->delete_deal_course($deal_course->deal_course_id);
-                header('Location:index.php?page=Lista-de-Orcamentos&success=delete'); 
+                header('Location:index.php?page=Lista-de-Orcamentos&success=delete');
+                exit;
             } 
-            else
-            {
-                echo "<script language=\"JavaScript\">;
-					alert(\"Operação inválida\");
-					document.location.href = 'index.php?page=Lista-de-Orcamentos';
-					</script>";
-            }
-    }
+        }
 
 
 

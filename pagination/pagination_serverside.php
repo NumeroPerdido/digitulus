@@ -53,19 +53,21 @@ switch($table){
     case "digitulus_duration":		$tb_col=array("standard_travel_duration","standard_travel_duration_name","australia_travel_duration","ireland_travel_duration","standard_travel_duration","standard_travel_duration");
 		break;
     
-    case "digitulus_client":
-$tb_col=array("client_id","client_name","client_surname","client_phone","client_mobile","client_email","client_id","client_id");
+    case "digitulus_client":    $tb_col=array("client_id","client_name","client_surname","client_phone","client_mobile","client_email","client_id","client_id","client_id");
         break;
         
     case "digitulus_opportunity":    $tb_col=array("opportunity_id","opportunity_title","opportunity_status","client_name","client_surname","client_phone","client_mobile","client_email","client_id","opportunity_user_id");
         $jointable="digitulus_client";
         break;
-    case "digitulus_opportunity_complete":    $tb_col=array("opportunity_id","opportunity_title","client_name","client_surname","client_phone","client_email","opportunity_status","client_id","opportunity_user_id","opportunity_deal_date");
+    case "digitulus_opportunity_complete":    $tb_col=array("opportunity_id","opportunity_title","opportunity_status","client_name","client_surname","client_phone","client_mobile","client_email","opportunity_user_id","client_id","opportunity_user_id");
         $jointable="digitulus_client";
         $table="digitulus_opportunity";
         break;
     case "digitulus_activity":    
         $tb_col=array("activity_id","activity_date","activity_proposal","activity_answer","activity_opportunity_id");
+        break;
+    case "digitulus_family_relation":    
+        $tb_col=array("family_relation_id","child_id","father_id","mother_id","family_relation_id","family_relation_id");
         break;
 }
 

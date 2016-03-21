@@ -135,7 +135,7 @@
                                                     <div class="console-font" id="normal_profit<?php echo $i; ?>"></div>
                                                     <div class="console-font" id="comparing_factor_profit<?php echo $i; ?>"></div>
                                                     <div class="console-font" id="default_profit<?php echo $i; ?>"></div>
-                                                    <div class="console-font" id="default_factor_profit<?php echo $i; ?>"></div>
+                                                    <div class="console-important" id="default_factor_profit<?php echo $i; ?>"></div>
                                                     <div class="console-font" id="real_profit<?php echo $i; ?>"></div>
                                                     <div class="console-font" id="flight_gross<?php echo $i; ?>"></div>
                                                     <div class="console-font" id="flight_gross_real<?php echo $i; ?>"></div>
@@ -151,324 +151,228 @@
                                         </div>
                                         <!-- fim console-->
                                         <div class="row">
-                                            <div class="col-xs-4">
-                                                    <div class="form-group">
-                                                        <input type="hidden" class="form-control" name="qtproducts" id="qtproducts" value = "<?php echo $qtproducts; ?>"/>															
-                                                        <label>Sku</label>
-                                                        <input type="text" class="form-control" name="sku<?php echo $i; ?>" id="sku<?php echo $i; ?>" value="<?php echo $product->sku; ?>" placeholder="Sku"/>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Nome do Produto</label>
-                                                        <input type="text" class="form-control" name="name<?php echo $i; ?>" id="name<?php echo $i; ?>"  id="name<?php echo $i; ?>" value="<?php echo $product->name; ?>" placeholder="Nome" readonly />
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Escola</label>
-                                                        <input type="text" class="form-control" name="school<?php echo $i; ?>" id="school<?php echo $i; ?>" onchange="load_all_functions_text(<?php echo json_encode($i); ?>);"value="<?php echo $product->school; ?>" placeholder="Escola"/>
-                                                    </div>
-                                                <div class="form-group">
-                                                        <label>País</label>
-                                                        <select class="form-control" onchange="load_all_functions_text(<?php echo json_encode($i); ?>);get_currency(<?php echo json_encode($i); ?>);load_all_functions_budget(<?php echo json_encode($i); ?>)" name="country<?php echo $i; ?>" id="country<?php echo $i; ?>">
-                                                            <option value=""></option>
-                                                            <?php
-                                                                //mostra todas os países que estão no BD em forma de dropdown
-                                                                foreach($country_default as $array){
-                                                                    $countryrow=implode(",",$array);
-                                                                    if($array["country"]==$product->country){
-                                                                        echo "
-                                                                        <option value='".$countryrow."' selected='selected'>".$array["country"]."</option>
-                                                                    ";
-                                                                    }
-                                                                    echo "
-                                                                        <option value='".$countryrow."'>".$array["country"]."</option>
-                                                                    ";
-                                                                    }   
-                                                            ?>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Cidade</label>
-                                                        <input type="text" class="form-control" onchange="load_all_functions_text(<?php echo json_encode($i); ?>);" name="city<?php echo $i; ?>" id="city<?php echo $i; ?>" value="<?php echo $product->city; ?>" placeholder="Cidade"/>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Bairro</label>
-                                                        <input type="text" class="form-control" onchange="load_all_functions_text(<?php echo json_encode($i); ?>);" name="neighbourhood<?php echo $i; ?>" id="neighbourhood<?php echo $i; ?>" value="<?php echo $product->neighbourhood; ?>" placeholder="Bairro"/>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Idioma</label>
-                                                        <input type="text" class="form-control" onchange="load_all_functions_text(<?php echo json_encode($i); ?>);" name="language<?php echo $i; ?>" id="language<?php echo $i; ?>"value="<?php echo $product->language; ?>" placeholder="Idioma"/>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Duração do Curso</label>
-                                                        <select class="form-control" name="course_duration<?php echo $i; ?>" id="course_duration<?php echo $i; ?>" onchange="load_all_functions_text(<?php echo json_encode($i); ?>);load_all_functions_budget(<?php echo json_encode($i); ?>)">
-                                                            <option value=" , "></option>
-                                                            <?php
-                                                                  //mostra todas as durações de curso que estão no BD em forma de dropdown
-                                                                foreach($duration as $array){
-                                                                    $durationrow=implode(",",$array);
-                                                                    //seleciona a opção 4 semanas como padrão
-                                                                    if($array["standard_travel_duration"]==4){
-                                                                        $selected="selected=selected";
-                                                                    }
-                                                                    elseif($array["standard_travel_duration"]==$budget->course_duration_value){
-                                                                        $selected="selected=selected";
-                                                                    }
-                                                                    else{
-                                                                        $selected="";
-                                                                    }
-                                                                        echo "
-                                                                        <option value='".$durationrow."' ".$selected." >".$array["standard_travel_duration"]." Semana(s)</option>
-                                                                        ";
-                                                                    }   
-                                                            ?>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Duração da Acomodação</label>
-                                                        <select class="form-control" name="accommodation_duration<?php echo $i; ?>" id="accommodation_duration<?php echo $i; ?>" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)">
-                                                            <option value=""></option>
-                                                            <?php
-                                                                //mostra todas as durações de curso que estão no BD em forma de dropdown
-                                                                foreach($duration as $array){
-                                                                    $durationrow=implode(",",$array);
-                                                                    if($array["standard_travel_duration"]==4){
-                                                                        $selected="selected=selected";
-                                                                    }
-                                                                    elseif($array["standard_travel_duration"]==$budget->accommodation_duration_value){
-                                                                        $selected="selected=selected";
-                                                                    }
-                                                                    else{
-                                                                        $selected="";
-                                                                    }
-                                                                        echo "
-                                                                        <option value='".$durationrow."' ".$selected." >".$array["standard_travel_duration"]." Semana(s)</option>
-                                                                        ";
-                                                                    }   
+                                                        <div class="col-xs-4">
+                                                                <div class="form-group">
+                                                                    <input type="hidden" class="form-control" name="qtproducts" id="qtproducts" value = "<?php echo $qtproducts; ?>"/>                                                          
+                                                                    <label>Sku</label>
+                                                                    <input type="text" class="form-control" name="sku<?php echo $i; ?>" id="sku<?php echo $i; ?>" value="<?php echo $product->sku;?>" readonly/>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Nome do Produto</label>
+                                                                    <input type="text" class="form-control" name="name<?php echo $i; ?>" id="name<?php echo $i; ?>"  id="name<?php echo $i; ?>" placeholder="Nome" onfocus="this.form.school<?php echo $i; ?>.focus()" value="<?php echo $product->name;?>" readonly />
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Escola</label>
+                                                                    <input type="text" class="form-control" name="school<?php echo $i; ?>" id="school<?php echo $i; ?>" onfocus="active_autocomplete({id: this.id, target_field: 'school', search_field: 'school', table: 'digitulus_product'});" onchange="load_all_functions_text(<?php echo json_encode($i); ?>);" value="<?php echo $product->school;?>" placeholder="Escola" required/>
+                                                                </div>
+                                                            <div class="form-group">
+                                                                <label>País</label>
+                                                                <input type="text" class="form-control" name="country<?php echo $i; ?>" id="country<?php echo $i; ?>" onfocus="active_autocomplete({id: this.id, target_field: 'country_pt', search_field: 'country_pt', table: 'digitulus_country_list', validate: 'true'});" onchange="load_all_functions_text(<?php echo json_encode($i); ?>);get_currency(<?php echo json_encode($i); ?>);load_all_functions_budget(<?php echo json_encode($i); ?>)" value="<?php echo $product->country;?>" placeholder="País" />
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Cidade</label>
+                                                                    <input type="text" class="form-control" name="city<?php echo $i; ?>" id="city<?php echo $i; ?>" onchange="load_all_functions_text(<?php echo json_encode($i); ?>);" onfocus="active_autocomplete({id: this.id, target_field: 'city', search_field: 'city', table: 'digitulus_product', extra_clause: country<?php echo json_encode($i); ?>.value, extra_field: 'country' });" value="<?php echo $product->city;?>" placeholder="Cidade"/>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Bairro</label>
+                                                                    <input type="text" class="form-control" name="neighbourhood<?php echo $i; ?>" id="neighbourhood<?php echo $i; ?>" onchange="load_all_functions_text(<?php echo json_encode($i); ?>);" onfocus="active_autocomplete({id: this.id, target_field: 'neighbourhood', search_field: 'neighbourhood', table: 'digitulus_product'});" value="<?php echo $product->neighbourhood;?>" placeholder="Bairro"/>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Idioma</label>
+                                                                    <input type="text" class="form-control" name="language<?php echo $i; ?>" id="language<?php echo $i; ?>" onchange="load_all_functions_text(<?php echo json_encode($i); ?>);"  onfocus="active_autocomplete({id: this.id, target_field: 'language', search_field: 'language', table: 'digitulus_product', extra_clause: country<?php echo json_encode($i); ?>.value, extra_field: 'country' });" value="<?php echo $product->language;?>" placeholder="Idioma"/>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Rótulo da Imagem</label>
+                                                                    <input type="text" class="form-control" name="image_label<?php echo $i; ?>" id="image_label<?php echo $i; ?>" value="<?php echo $product->image_label;?>" placeholder="Rótulo da Imagem" readonly/>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Vídeo</label>
+                                                                    <input type="text" class="form-control" name="videoid<?php echo $i; ?>" id="videoid<?php echo $i; ?>" value="<?php echo $product->video;?>" placeholder="Vídeo"/>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Descrição do Produto</label>
+                                                                    <textarea class="form-control" name="description<?php echo $i; ?>" id="description<?php echo $i; ?>" rows="3" value="<?php echo $product->description;?>" placeholder="Descrição"></textarea>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Feriados</label>
+                                                                    <input type="text" class="form-control" name="holidays<?php echo $i; ?>" id="holidays<?php echo $i; ?>" value="<?php echo $product->holidays;?>" placeholder="Feriados"/>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Datas de Início</label>
+                                                                    <input type="text" class="form-control" name="start_dates<?php echo $i; ?>" id="start_dates<?php echo $i; ?>" value="<?php echo $product->start_dates;?>" placeholder="Datas de Início"/>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Aulas por Semana</label>
+                                                                    <input type="text" class="form-control" name="lessons_per_week<?php echo $i; ?>" id="lessons_per_week<?php echo $i; ?>" value="<?php echo $product->lessons_per_week;?>" onfocus="active_autocomplete({id: this.id, target_field: 'lessons_per_week', search_field: 'lessons_per_week', table: 'digitulus_product'});" placeholder="Aulas por Semana"/>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Duração das Aulas</label>
+                                                                    <input type="text" class="form-control" name="lesson_duration<?php echo $i; ?>" id="lesson_duration<?php echo $i; ?>" value="<?php echo $product->lesson_duration;?>" onfocus="active_autocomplete({id: this.id, target_field: 'lesson_duration', search_field: 'lesson_duration', table: 'digitulus_product'});" placeholder="Duração das Aulas"/>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Tipo de Acomodação</label>
+                                                                    <input type="text" class="form-control" name="accommodation_type<?php echo $i; ?>" id="accommodation_type<?php echo $i; ?>" value="<?php echo $product->accommodation_type;?>" onchange="load_all_functions_text(<?php echo json_encode($i); ?>);" onfocus="active_autocomplete({id: this.id, target_field: 'accommodation_type', search_field: 'accommodation_type', table: 'digitulus_product'});" placeholder="Tipo de Acomodação"/>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Tipo de Quarto</label>
+                                                                    <input type="text" class="form-control" name="room<?php echo $i; ?>" id="room<?php echo $i; ?>" onchange="load_all_functions_text(<?php echo json_encode($i); ?>);" value="<?php echo $product->room;?>" onfocus="active_autocomplete({id: this.id, target_field: 'room', search_field: 'room', table: 'digitulus_product'});" placeholder="Tipo de Quarto"/>
+                                                                </div>
 
-                                                            ?>
-                                                        </select>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label>Tipo de Acomodação</label>
-                                                        <input type="text" class="form-control" name="accommodation_type<?php echo $i; ?>" id="accommodation_type<?php echo $i; ?>" onchange="load_all_functions_text(<?php echo json_encode($i); ?>);"value="<?php echo $product->accommodation_type; ?>" placeholder="Tipo de Acomodação"/>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label>Descrição do Produto</label>
-                                                        <textarea class="form-control" name="description<?php echo $i; ?>" id="description<?php echo $i; ?>" rows="3"value="<?php echo $product->description; ?>" placeholder="Descrição"></textarea>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Parte Aérea Inclusa</label>
-                                                        <select class="form-control" name="flight_included<?php echo $i; ?>" id="flight_included<?php echo $i; ?>">
-                                                            <option value="Yes">Sim</option>
-                                                            <option value="No" selected="selected">Não</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Condições da Passagem Aérea</label>
-                                                        <textarea class="form-control" name="flight_conditions<?php echo $i; ?>" id="flight_conditions<?php echo $i; ?>" rows="3"value="<?php echo $product->flight_conditions; ?>" placeholder="Condições da Passagem Aérea"></textarea>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Feriados</label>
-                                                        <input type="text" class="form-control" name="holidays<?php echo $i; ?>" id="holidays<?php echo $i; ?>"value="<?php echo $product->holidays; ?>" placeholder="Feriados"/>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Aulas por Semana</label>
-                                                        <input type="text" class="form-control" name="lessons_per_week<?php echo $i; ?>" id="lessons_per_week<?php echo $i; ?>"value="<?php echo $product->lessons_per_week; ?>" placeholder="Aulas por Semana"/>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Duração das Aulas</label>
-                                                        <input type="text" class="form-control" name="lesson_duration<?php echo $i; ?>" id="lesson_duration<?php echo $i; ?>"value="<?php echo $product->lesson_duration; ?>" placeholder="Duração das Aulas"/>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Refeições</label>
-                                                        <input type="text" class="form-control" name="meals<?php echo $i; ?>" id="meals<?php echo $i; ?>" onchange="load_all_functions_text(<?php echo json_encode($i); ?>);"value="<?php echo $product->meals; ?>" placeholder="Refeições"/>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Meta Descrição</label>
-                                                        <textarea class="form-control" name="meta_description<?php echo $i; ?>" id="meta_description<?php echo $i; ?>" rows="3"value="<?php echo $product->meta_description; ?>" placeholder="Meta Descrição"></textarea>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Novo</label>
-                                                        <select class="form-control" name="new<?php echo $i; ?>" id="new<?php echo $i; ?>">
-                                                            <option value="Yes" selected="selected">Yes</option>
-                                                            <option value="No">No</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Datas de Validade</label>
-                                                        <div class="input-group">
-                                                            <div class="input-group-addon">
-                                                                <i class="fa fa-calendar"></i>
+                                                                <div class="form-group">
+                                                                    <label>Refeições</label>
+                                                                    <input type="text" class="form-control" name="meals<?php echo $i; ?>" id="meals<?php echo $i; ?>" onchange="load_all_functions_text(<?php echo json_encode($i); ?>);" value="<?php echo $product->meals;?>" onfocus="active_autocomplete({id: this.id, target_field: 'meals', search_field: 'meals', table: 'digitulus_product'});" placeholder="Refeições"/>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Meta Descrição</label>
+                                                                    <textarea class="form-control" name="meta_description<?php echo $i; ?>" id="meta_description<?php echo $i; ?>" rows="3" value="<?php echo $product->meta_description;?>" placeholder="Meta Descrição"></textarea>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Novo</label>
+                                                                    <select class="form-control" name="new<?php echo $i; ?>" id="new<?php echo $i; ?>">
+                                                                        <option value="Yes" selected="selected">Yes</option>
+                                                                        <option value="No">No</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Status</label>
+                                                                    <select class="form-control" name="status<?php echo $i; ?>" id="status<?php echo $i; ?>">
+                                                                        <option value="Enable" selected="selected">Ativo</option>
+                                                                        <option value="Disable">Inativo</option>
+                                                                    </select>
+                                                                </div>
+                                                                 <div class="form-group">
+                                                                    <label>Descrição Curta</label>
+                                                                    <textarea class="form-control" name="short_description<?php echo $i; ?>" id="short_description<?php echo $i; ?>" value="<?php echo $product->short_description;?>" rows="3" placeholder="Descrição Curta"></textarea>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>URL</label>
+                                                                    <input type="text" class="form-control" name="url_key<?php echo $i; ?>" id="url_key<?php echo $i; ?>" value="<?php echo $product->url_key;?>" placeholder="URL" readonly/>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Visibilidade</label>
+                                                                    <select class="form-control" name="visibility<?php echo $i; ?>" id="visibility<?php echo $i; ?>">
+                                                                        <option value="Yes" selected="selected">Sim</option>
+                                                                        <option value="No">Não</option>
+                                                                    </select>
+                                                                </div>
+                                                        </div><!-- /."col-xs-3  -->
+                                                        <!-- Segunda Parte do Formulário -->
+                                                        <div class="col-xs-4">
+                                                            <div class="form-group">
+                                                                <label>Moeda</label>
+                                                                <input type="text" class="form-control" name="exchange_rate<?php echo $i; ?>" id="exchange_rate<?php echo $i; ?>" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)" onfocus="active_autocomplete({id: this.id, target_field: 'currency_code', search_field: 'currency_code', table: 'digitulus_currency'});" value="<?php echo $budget->currency_code;?>" placeholder="Moeda"/>
                                                             </div>
-                                                            <input type="text" class="form-control pull-right" name="date<?php echo $i; ?>" id="date<?php echo $i; ?>"/>
+                                                            <div class="form-group">
+                                                                <label>Duração do Curso</label>
+                                                                <input type="text" class="form-control" name="course_duration<?php echo $i; ?>" id="course_duration<?php echo $i; ?>" onchange="load_all_functions_text(<?php echo json_encode($i); ?>);load_all_functions_budget(<?php echo json_encode($i); ?>);get_duration_value(<?php echo json_encode($i); ?>);duplicate_duration(<?php echo json_encode($i); ?>)" onfocus="active_autocomplete({id: this.id, target_field: 'standard_travel_duration_name', search_field: 'standard_travel_duration_name', table: 'digitulus_duration', validate: 'true'});" value="<?php echo $product->course_duration;?>" placeholder="Duração do Curso"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Valor Bruto do Curso por Semana</label>
+                                                                <input type="text" class="form-control" name="course_gross_per_week<?php echo $i; ?>" id="course_gross_per_week<?php echo $i; ?>" value="<?php echo $budget->course_gross_per_week;?>" onfocus="show_calc(this.id);" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>);" data-inputmask-alias="money" placeholder="Valor Bruto do Curso por Semana"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Valor Promocional do Curso por Semana</label>
+                                                                <input type="text" class="form-control" name="course_promo_per_week<?php echo $i; ?>" id="course_promo_per_week<?php echo $i; ?>" value="<?php echo $budget->course_promo_per_week;?>" onfocus="show_calc(this.id);" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)" data-inputmask-alias="money" placeholder="Valor Promocional do Curso por Semana"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Comissão sobre o Curso (%)</label>
+                                                                <input type="text" class="form-control" name="course_commission<?php echo $i; ?>" id="course_commission<?php echo $i; ?>" value="<?php echo $budget->course_commission;?>" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)" data-inputmask-alias="percentage" placeholder="Comissão sobre o Curso (%)"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Duração da Acomodação</label>
+                                                                <input type="text" class="form-control" name="accommodation_duration<?php echo $i; ?>" id="accommodation_duration<?php echo $i; ?>" value="<?php echo $product->accommodation_duration;?>" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>);get_accommodation_duration_value(<?php echo json_encode($i); ?>);" onfocus="active_autocomplete({id: this.id, target_field: 'standard_travel_duration_name', search_field: 'standard_travel_duration_name', table: 'digitulus_duration', validate: 'true'});" placeholder="Duração da Acomodação"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Valor Bruto da Acomodação por Semana</label>
+                                                                <input type="text" class="form-control" name="accommodation_per_week<?php echo $i; ?>" id="accommodation_per_week<?php echo $i; ?>" value="<?php echo $budget->course_commission;?>" onfocus="show_calc(this.id);" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)" data-inputmask-alias="money" placeholder="Valor Bruto da Acomodação por Semana"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                    <label>Desconto do Valor Bruto da Acomodação para o Valor Promocional</label>
+                                                                    <input type="text" class="form-control" name="discount_accommodation<?php echo $i; ?>" id="discount_accommodation<?php echo $i; ?>" value="<?php echo $budget->discount_accommodation;?>" onfocus="show_calc(this.id);" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)" data-inputmask-alias="money" placeholder="Desconto do Valor Bruto da Acomodação para o Valor Promocional"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Comissão sobre a Acomodação (%)</label>
+                                                                <input type="text" class="form-control" name="accommodation_commission<?php echo $i; ?>" id="accommodation_commission<?php echo $i; ?>" value="<?php echo $budget->accommodation_commission;?>" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)" data-inputmask-alias="percentage" placeholder="Comissão sobre a Acomodação (%)"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Taxa de Material</label>
+                                                                <input type="text" class="form-control" name="material_fee_value<?php echo $i; ?>" id="material_fee_value<?php echo $i; ?>" value="<?php echo $budget->material_fee_value;?>" onfocus="show_calc(this.id);" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)" data-inputmask-alias="money" placeholder="Taxa de Material"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                    <label>Taxa de Matrícula</label>
+                                                                    <input type="text" class="form-control" name="registration_fee_value<?php echo $i; ?>" id="registration_fee_value<?php echo $i; ?>" value="<?php echo $budget->registration_fee_value;?>" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)" data-inputmask-alias="money" placeholder="Taxa de Matrícula"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Taxa de Colocação em Acomodação</label>
+                                                                <input type="text" class="form-control" name="accommodation_fee_value<?php echo $i; ?>" id="accommodation_fee_value<?php echo $i; ?>" value="<?php echo $budget->accommodation_fee_value;?>" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)" data-inputmask-alias="money" placeholder="Taxa de Colocação em Acomodação"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Taxa de Exames Obrigatórios</label>
+                                                                <input type="text" class="form-control" name="exam_fee_value<?php echo $i; ?>" id="exam_fee_value<?php echo $i; ?>" value="<?php echo $budget->exam_fee_value;?>" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)" data-inputmask-alias="money" placeholder="Taxa de Exames Obrigatórios"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Taxa de Serviços aos Estudantes</label>
+                                                                <input type="text" class="form-control" name="student_service_fee_value<?php echo $i; ?>" id="student_service_fee_value<?php echo $i; ?>" value="<?php echo $budget->student_service_fee_value;?>" onfocus="show_calc(this.id);" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)" data-inputmask-alias="money" placeholder="Taxa de Serviços aos Estudantes"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Taxa de Correio Expresso</label>
+                                                                <input type="text" class="form-control" name="courier_fee_value<?php echo $i; ?>" id="courier_fee_value<?php echo $i; ?>" value="<?php echo $budget->courier_fee_value;?>" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)" data-inputmask-alias="money" placeholder="Taxa de Correio Expresso"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Traslado de Chegada</label>
+                                                                <input type="text" class="form-control" name="airport_transfer_value<?php echo $i; ?>" id="airport_transfer_value<?php echo $i; ?>" value="<?php echo $budget->airport_transfer_value;?>" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)" data-inputmask-alias="money" placeholder="Traslado de Chegada"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Desconto no Valor Bruto das Taxas para Valor Líquido</label>
+                                                                <input type="text" class="form-control" name="discount_fees_value<?php echo $i; ?>" id="discount_fees_value<?php echo $i; ?>" value="<?php echo $budget->discount_fees_value;?>" onfocus="show_calc(this.id);" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)" data-inputmask-alias="money" placeholder="Desconto no Valor Bruto das Taxas para Valor Líquido"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Seguro Obrigatório</label>
+                                                                <input type="text" class="form-control" name="required_insurance_value<?php echo $i; ?>" id="required_insurance_value<?php echo $i; ?>" value="<?php echo $budget->required_insurance_value;?>" onfocus="show_calc(this.id);" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)" data-inputmask-alias="money" placeholder="Seguro Obrigatório"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Fator para o Cálculo do Lucro</label>
+                                                                <input type="text" class="form-control" name="factor_profit<?php echo $i; ?>" id="factor_profit<?php echo $i; ?>" value="<?php echo $budget->factor_profit;?>" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)" data-inputmask-alias="integer" placeholder="Fator para o Cálculo do Lucro"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Custo (R$)</label>
+                                                                <input type="text" class="form-control" name="cost<?php echo $i; ?>" id="cost<?php echo $i; ?>" value="<?php echo $budget->cost;?>" onfocus="this.form.special_to_date<?php echo $i; ?>.focus()" data-inputmask-alias="BRL" placeholder="Custo (R$)" readonly />
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Preço (R$)</label>
+                                                                <input type="text" class="form-control" name="price<?php echo $i; ?>" id="price<?php echo $i; ?>" value="<?php echo $budget->price;?>" onfocus="this.form.special_to_date<?php echo $i; ?>.focus()" data-inputmask-alias="BRL" placeholder="Preço (R$)" readonly />
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Preço Especial (R$)</label>
+                                                                <input type="text" class="form-control" name="special_price<?php echo $i; ?>" id="special_price<?php echo $i; ?>" value="<?php echo $budget->special_price;?>" onfocus="this.form.special_to_date<?php echo $i; ?>.focus()" data-inputmask-alias="BRL" placeholder="Preço Especial (R$)" readonly />
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Data Final da Validade do Preço Especial</label>
+                                                                <input type="text" class="form-control" name="special_to_date<?php echo $i; ?>" id="special_to_date<?php echo $i; ?>" value="<?php echo $budget->special_to_date;?>" placeholder="Data Final da Validade do Preço Especial"/>
+                                                            </div>
+                                                            
+                                                                
+                                                           <div class="form-group">
+                                                                <label>Endereço</label>
+                                                                <input type="text" size=60px  name="txtEndereco<?php echo $i; ?>" id="txtEndereco" placeholder="Endereço da Escola" class="geocomplete" class="form-control"/>
+                                                               </div>
+                                                               
+                                                            <div class="form-group">
+                                                                <label>Latitude</label>
+                                                                <input type="text" class="form-control" name="latitude<?php echo $i; ?>" value="<?php echo $product->latitude;?>" id="txtLatitude" placeholder="Latitude"/>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label>Longitude</label>
+                                                                <input type="text" class="form-control" name="longitude<?php echo $i; ?>" value="<?php echo $budget->longitude;?>" id="txtLongitude" placeholder="Longitude"/>
+                                                            </div>
+                                                            
+                                                                
+                                                               
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Status</label>
-                                                        <select class="form-control" name="status<?php echo $i; ?>" id="status<?php echo $i; ?>">
-                                                            <option value="Enable" selected="selected">Ativo</option>
-                                                            <option value="Disable">Inativo</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Requisitos</label>
-                                                        <input type="text" class="form-control" name="requirements<?php echo $i; ?>" id="requirements<?php echo $i; ?>"value="<?php echo $product->requirements; ?>" placeholder="Requisitos"/>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Tipo de Quarto</label>
-                                                        <input type="text" class="form-control" name="room<?php echo $i; ?>" id="room<?php echo $i; ?>" onchange="load_all_functions_text(<?php echo json_encode($i); ?>);"value="<?php echo $product->room; ?>" placeholder="Tipo de Quarto"/>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Promoção</label>
-                                                        <select class="form-control" name="sale<?php echo $i; ?>" id="sale<?php echo $i; ?>">
-                                                            <option value="Yes">Sim</option>
-                                                            <option value="No" selected="selected">Não</option>
-                                                        </select>
-                                                    </div>
-                                                     <div class="form-group">
-                                                        <label>Descrição Curta</label>
-                                                        <textarea class="form-control" name="short_description<?php echo $i; ?>" id="short_description<?php echo $i; ?>" rows="3"value="<?php echo $product->short_description; ?>" placeholder="Descrição Curta"></textarea>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Datas de Início</label>
-                                                        <input type="text" class="form-control" name="start_dates<?php echo $i; ?>" id="start_dates<?php echo $i; ?>"value="<?php echo $product->start_dates; ?>" placeholder="Datas de Início"/>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>URL</label>
-                                                        <input type="text" class="form-control" name="url_key<?php echo $i; ?>" id="url_key<?php echo $i; ?>"value="<?php echo $product->url_key; ?>" placeholder="URL" readonly/>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Vídeo</label>
-                                                        <input type="text" class="form-control" name="videoid<?php echo $i; ?>" id="videoid<?php echo $i; ?>"value="<?php echo $product->videoid; ?>" placeholder="Vídeo"/>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Visibilidade</label>
-                                                        <select class="form-control" name="visibility<?php echo $i; ?>" id="visibility<?php echo $i; ?>">
-                                                            <option value="Yes" selected="selected">Sim</option>
-                                                            <option value="No">Não</option>
-                                                        </select>
-                                                    </div>
-                                                     <div class="form-group">
-                                                        <label>O que está incluso</label>
-                                                        <input type="text" class="form-control" id="whats_included<?php echo $i; ?>"value="<?php echo $product->whats_included; ?>" placeholder="O que está incluso"/>
-                                                    </div>
-                                                     <div class="form-group">
-                                                        <label>O que não está incluso</label>
-                                                        <input type="text" class="form-control" name="whats_not_included<?php echo $i; ?>" id="whats_not_included<?php echo $i; ?>"value="<?php echo $product->whats_not_included; ?>" placeholder="O que não está incluso"/>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Label da Imagem</label>
-                                                        <input type="text" class="form-control" name="image_label<?php echo $i; ?>" id="image_label<?php echo $i; ?>"value="<?php echo $product->image_label; ?>" placeholder="Label da Imagem" readonly/>
-                                                    </div>
-                                            </div><!-- /."col-xs-3  -->
-                                            <!-- Segunda Parte do Formulário -->
-                                            <div class="col-xs-4">
-                                                <div class="form-group">
-                                                    <label>Moeda</label>
-                                                    <input type="text" class="form-control" name="exchange_rate<?php echo $i; ?>" id="exchange_rate<?php echo $i; ?>" onchange=""value="" placeholder="Moeda"/>
-                                                    <input type="hidden" class="form-control" name="currency_code<?php echo $i; ?>" id="currency_code<?php echo $i; ?>" value="<?php echo $budget->currency_code; ?>" />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Valor Bruto do Curso por Semana</label>
-                                                    <input type="text" class="form-control" name="course_gross_per_week<?php echo $i; ?>" id="course_gross_per_week<?php echo $i; ?>" value="<?php echo $budget->course_gross_per_week; ?>" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)"value="" placeholder="Valor Bruto do Curso por Semana"/>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Valor Promocional do Curso por Semana</label>
-                                                    <input type="text" class="form-control" name="course_promo_per_week<?php echo $i; ?>" id="course_promo_per_week<?php echo $i; ?>" value="<?php echo $budget->course_promo_per_week; ?>" onfocus="show_calc(<?php echo json_encode($i); ?>);" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)"value="" placeholder="Valor Promocional do Curso por Semana"/>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Comissão sobre o Curso (%)</label>
-                                                    <input type="text" class="form-control" name="course_commission<?php echo $i; ?>" id="course_commission<?php echo $i; ?>" value="<?php echo $budget->course_commission; ?>" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)"value="" placeholder="Comissão sobre o Curso (%)"/>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Valor Bruto da Acomodação por Semana</label>
-                                                    <input type="text" class="form-control" name="accommodation_per_week<?php echo $i; ?>" id="accommodation_per_week<?php echo $i; ?>" value="<?php echo $budget->accommodation_per_week; ?>" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)"value="" placeholder="Valor Bruto da Acomodação por Semana"/>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Desconto do Valor Bruto da Acomodação para o Valor Promocional</label>
-                                                    <input type="text" class="form-control" name="discount_accommodation<?php echo $i; ?>" id="discount_accommodation<?php echo $i; ?>" value="<?php echo $budget->discount_accommodation; ?>" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)"value="" placeholder="Desconto do Valor Bruto da Acomodação para o Valor Promocional"/>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Comissão sobre a Acomodação (%)</label>
-                                                    <input type="text" class="form-control" name="accommodation_commission<?php echo $i; ?>" id="accommodation_commission<?php echo $i; ?>" value="<?php echo $budget->accommodation_commission; ?>" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)"value="" placeholder="Comissão sobre a Acomodação (%)"/>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Taxa de Material</label>
-                                                    <input type="text" class="form-control" name="material_fee_value<?php echo $i; ?>" id="material_fee_value<?php echo $i; ?>" value="<?php echo $budget->material_fee_value; ?>" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)"value="" placeholder="Taxa de Material"/>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Taxa de Matrícula</label>
-                                                    <input type="text" class="form-control" name="registration_fee_value<?php echo $i; ?>" id="registration_fee_value<?php echo $i; ?>" value="<?php echo $budget->registration_fee_value; ?>" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)"value="" placeholder="Taxa de Matrícula"/>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Taxa de Colocação em Acomodação</label>
-                                                    <input type="text" class="form-control" name="accommodation_fee_value<?php echo $i; ?>" id="accommodation_fee_value<?php echo $i; ?>" value="<?php echo $budget->accommodation_fee_value; ?>" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)"value="" placeholder="Taxa de Colocação em Acomodação"/>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Taxa de Exames Obrigatórios</label>
-                                                    <input type="text" class="form-control" name="exam_fee_value<?php echo $i; ?>" id="exam_fee_value<?php echo $i; ?>" value="<?php echo $budget->exam_fee_value; ?>" onchange="cload_all_functions_budget(<?php echo json_encode($i); ?>)"value="" placeholder="Taxa de Exames Obrigatórios"/>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Taxa de Serviços aos Estudantes</label>
-                                                    <input type="text" class="form-control" name="student_service_fee_value<?php echo $i; ?>" id="student_service_fee_value<?php echo $i; ?>" value="<?php echo $budget->student_service_fee_value; ?>" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)"value="" placeholder="Taxa de Serviços aos Estudantes"/>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Taxa de Correio Expresso</label>
-                                                    <input type="text" class="form-control" name="courier_fee_value<?php echo $i; ?>" id="courier_fee_value<?php echo $i; ?>" value="<?php echo $budget->courier_fee_value; ?>" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)"value="" placeholder="Taxa de Correio Expresso"/>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Traslado de Chegada</label>
-                                                    <input type="text" class="form-control" name="airport_transfer_value<?php echo $i; ?>" id="airport_transfer_value<?php echo $i; ?>" value="<?php echo $budget->airport_transfer_value; ?>" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)"value="" placeholder="Traslado de Chegada"/>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Desconto no Valor Bruto das Taxas para Valor Líquido</label>
-                                                    <input type="text" class="form-control" name="discount_fees_value<?php echo $i; ?>" id="discount_fees_value<?php echo $i; ?>" value="<?php echo $budget->discount_fees_value; ?>" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)"value="" placeholder="Desconto no Valor Bruto das Taxas para Valor Líquido"/>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Seguro Obrigatório</label>
-                                                    <input type="text" class="form-control" name="required_insurance_value<?php echo $i; ?>" id="required_insurance_value<?php echo $i; ?>" value="<?php echo $budget->required_insurance_value; ?>" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)" value="" placeholder=""/>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Fator para o Cálculo do Lucro</label>
-                                                    <input type="text" class="form-control" name="factor_profit<?php echo $i; ?>" id="factor_profit<?php echo $i; ?>" value="<?php echo $budget->factor_profit; ?>" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)"value="" placeholder="Fator para o Cálculo do Lucro"/>
-                                                </div>
-                                                <div class="form-group">
-                                                        <label>Código Iata do Aeroporto de Chegada</label>
-                                                        <select class="form-control" name="iata_arrival_at<?php echo $i; ?>" id="iata_arrival_at<?php echo $i; ?>" value="<?php echo $budget->iata_arrival_at; ?>" onchange="load_all_functions_budget(<?php echo json_encode($i); ?>)">
-                                                            <option value=" & "></option>
-                                                            <?php
-                                                                  //mostra todas as durações de curso que estão no BD em forma de dropdown
-                                                                foreach($flight as $array){
-                                                                    //transforma o vetor php em string para enviar via javascript
-                                                                    $flightrow=implode("&",$array);
-                                                                        echo "
-                                                                        <option value='".$flightrow."' >".$array["iata_arrival_at"]."</option>
-                                                                        ";
-                                                                    }   
-                                                            ?>
-                                                        </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Cost</label>
-                                                    <input type="text" class="form-control" name="cost<?php echo $i; ?>" id="cost<?php echo $i; ?>" value="<?php echo $budget->cost; ?>" placeholder="Custo" readonly />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Price</label>
-                                                    <input type="text" class="form-control" name="price<?php echo $i; ?>" value="<?php echo $budget->price; ?>" id="price<?php echo $i; ?>" placeholder="Preço" readonly />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Special Price</label>
-                                                    <input type="text" class="form-control" name="special_price<?php echo $i; ?>" id="special_price<?php echo $i; ?>" value="<?php echo $budget->special_price; ?>" placeholder="Preço Especial" readonly />
-                                                </div>
-                                                <div class="form-group">
-                                                    <label>Validade Preço Especial</label>
-                                                    <input type="text" class="form-control" name="special_to_date<?php echo $i; ?>" id="special_to_date<?php echo $i; ?>" onload="alerta();" value="<?php echo $budget->special_to_date; ?>" placeholder="Validade Preço Especial"/>
-                                                </div>
-                                            </div>
-                                            <!-- Final segunda parte formulário -->
-                                            <!-- /.col-xs-4  -->
-                                        </div><!-- /.row  -->
+                                                        <!-- Final segunda parte formulário -->
+                                                        <!-- /.col-xs-4  -->
+                                                    
+                                                    </div><!-- /.row  -->  
                                     </div><!-- /.tab-pane  -->
                             <?php
                                 }//final do for
@@ -511,5 +415,4 @@
     }
     //achama a função que carrega as informações do console
     load_console();
-    
 </script>
